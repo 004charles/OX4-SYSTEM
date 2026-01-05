@@ -1,0 +1,1181 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> OX4 Moto-Táxi - Passageiros </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% include 'include/css.html' %}
+
+    <style>
+        /* FUNDO GERAL - PASSAGEIROS */
+        body {
+            background: #002841 !important;
+            color: white;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        /* Ajuste de cores das seções */
+        .bg-dark-blue {
+            background: rgba(0, 28, 51, 0.7) !important;
+            backdrop-filter: blur(10px);
+        }
+
+        .bg-darker-blue {
+            background: rgba(0, 15, 28, 0.8) !important;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Hero Section com Slider */
+        .passenger-hero {
+            background: #002841;
+            position: relative;
+            overflow: hidden;
+            padding: 120px 0 80px;
+        }
+
+        .hero-slider-container {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            border-radius: 20px;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 40, 65, 0.85) 0%, rgba(0, 28, 51, 0.7) 100%);
+            border-radius: 20px;
+        }
+
+        .slider-indicators {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .slider-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .slider-indicator.active {
+            background: #4a6cf7;
+            border-color: white;
+            transform: scale(1.3);
+            box-shadow: 0 0 15px rgba(74, 108, 247, 0.7);
+        }
+
+        /* Animação especial do slider */
+        @keyframes slideIn {
+            0% {
+                transform: scale(1.1) rotate(-0.5deg);
+                filter: blur(3px) brightness(0.8);
+            }
+
+            100% {
+                transform: scale(1) rotate(0deg);
+                filter: blur(0) brightness(1);
+            }
+        }
+
+        .hero-slide.active {
+            animation: slideIn 2s ease-out forwards;
+        }
+
+        /* Badge animado */
+        .passenger-badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #4a6cf7, #3a6de5);
+            padding: 12px 30px;
+            border-radius: 50px;
+            animation: badgePulse 2s infinite;
+            box-shadow: 0 0 25px rgba(74, 108, 247, 0.5);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes badgePulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 25px rgba(74, 108, 247, 0.5);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 35px rgba(74, 108, 247, 0.8);
+            }
+        }
+
+        /* Seções gerais */
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        /* Cards de serviço */
+        .service-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 40px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.4s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: #4a6cf7;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(74, 108, 247, 0.15), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        /* Imagens com efeito hover */
+        .image-hover-effect {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            transition: all 0.5s ease;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .image-hover-effect img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: all 0.7s ease;
+        }
+
+        .image-hover-effect:hover img {
+            transform: scale(1.1);
+        }
+
+        .image-hover-effect::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(to top, rgba(0, 40, 65, 0.9), transparent);
+            opacity: 0.8;
+        }
+
+        /* Moto animation */
+        .moto-animation-container {
+            position: relative;
+            height: 350px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: rgba(0, 28, 51, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(74, 108, 247, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .moto-riding {
+            position: relative;
+            width: 250px;
+            height: 200px;
+        }
+
+        .moto-icon-animated {
+            font-size: 7rem;
+            color: #4a6cf7;
+            animation: motoFloat 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(74, 108, 247, 0.5));
+        }
+
+        @keyframes motoFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            25% {
+                transform: translateY(-15px) rotate(3deg);
+            }
+
+            50% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            75% {
+                transform: translateY(-8px) rotate(-3deg);
+            }
+        }
+
+        /* App preview */
+        .app-preview {
+            position: relative;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        .phone-frame {
+            background: rgba(0, 28, 51, 0.7);
+            border-radius: 35px;
+            padding: 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            animation: phoneFloat 6s ease-in-out infinite;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes phoneFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            25% {
+                transform: translateY(-20px) rotate(1deg);
+            }
+
+            50% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            75% {
+                transform: translateY(-10px) rotate(-1deg);
+            }
+        }
+
+        /* Gallery slider */
+        .gallery-slider {
+            position: relative;
+            height: 450px;
+            overflow: hidden;
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gallery-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.2s ease;
+            border-radius: 25px;
+        }
+
+        .gallery-slide.active {
+            opacity: 1;
+        }
+
+        .gallery-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 25px;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .gallery-btn {
+            background: rgba(74, 108, 247, 0.9);
+            border: none;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
+        }
+
+        .gallery-btn:hover {
+            background: #4a6cf7;
+            transform: scale(1.15);
+            box-shadow: 0 0 20px rgba(74, 108, 247, 0.8);
+        }
+
+        /* Feature boxes */
+        .feature-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 18px;
+            padding: 35px;
+            border-left: 5px solid #4a6cf7;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-box:hover {
+            background: rgba(74, 108, 247, 0.15);
+            transform: translateX(10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Stats */
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #4a6cf7, #3a6de5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: statGlow 3s infinite;
+            text-shadow: 0 5px 15px rgba(74, 108, 247, 0.3);
+        }
+
+        @keyframes statGlow {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 5px rgba(74, 108, 247, 0.3));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 15px rgba(74, 108, 247, 0.6));
+            }
+        }
+
+        /* Review cards */
+        .review-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .review-card:hover {
+            background: rgba(74, 108, 247, 0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(74, 108, 247, 0.5);
+        }
+
+        /* Botões aprimorados */
+        .btn-primary {
+            background: linear-gradient(135deg, #4a6cf7, #3a6de5) !important;
+            border: none !important;
+            box-shadow: 0 10px 25px rgba(74, 108, 247, 0.4) !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) !important;
+            box-shadow: 0 15px 30px rgba(74, 108, 247, 0.6) !important;
+        }
+
+        .btn-outline-light {
+            border: 2px solid rgba(255, 255, 255, 0.3) !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .btn-outline-light:hover {
+            border-color: white !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+            transform: translateY(-3px) !important;
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2) !important;
+        }
+
+        /* Responsividade */
+        @media (max-width: 991px) {
+            .section-padding {
+                padding: 80px 0;
+            }
+
+            .hero-slider-container {
+                height: 400px;
+            }
+
+            .gallery-slider {
+                height: 350px;
+            }
+
+            .image-hover-effect img {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 60px 0;
+            }
+
+            .hero-slider-container {
+                height: 300px;
+            }
+
+            .passenger-hero {
+                padding: 100px 0 60px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    {% include 'include/loading.html' %}
+    {% include 'include/menusite.html' %}
+
+    <!-- Hero Section com Slider -->
+    <section class="passenger-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="passenger-badge mb-4">
+                        <span>🏍️ NOVO NÍVEL DE MOBILIDADE EM ANGOLA</span>
+                    </div>
+
+                    <h1 class="text-white mb-4" style="font-size: 3.5rem; font-weight: 800; line-height: 1.1;">
+                        Mais do que um táxi.<br>
+                        <span style="color: #4a6cf7;">Moto-Táxi</span> seguro e confiável.
+                    </h1>
+
+                    <p class="lead text-light mb-5 opacity-75" style="font-size: 1.2rem;">
+                        A OX4 é a sua app de referência para deslocação sem complicações. Viagens rápidas, seguras e
+                        convenientes por toda Angola com nossos moto-táxis próprios.
+                    </p>
+
+                    <div class="d-flex flex-wrap gap-3">
+                        <a class="btn btn-primary btn-lg px-5 py-3" href="#"
+                            style="border-radius: 15px; font-weight: 600;">
+                            <i class="fas fa-download me-2"></i> Baixar a App
+                        </a>
+                        <a class="btn btn-outline-light btn-lg px-4 py-3" href="#" style="border-radius: 15px;">
+                            <i class="fas fa-play-circle me-2"></i> Ver Como Funciona
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="hero-slider-container mt-5 mt-lg-0">
+                        <!-- Slides -->
+                        <div class="hero-slide active"
+                            style="background-image: url('{% static 'assets2/images/rua.png' %}');">
+                        </div>
+                        <div class="hero-slide active"
+                            style="background-image: url('{% static 'assets2/images/corrida.png' %}');">
+                        </div>
+                        <div class="hero-slide active"
+                            style="background-image: url('{% static 'assets2/images/dois.png' %}');">
+                        </div>
+
+                        <!-- Indicadores -->
+                        <div class="slider-indicators">
+                            <div class="slider-indicator active" data-slide="0"></div>
+                            <div class="slider-indicator" data-slide="1"></div>
+                            <div class="slider-indicator" data-slide="2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nossos Serviços - Focado em Moto-Táxi -->
+    <section class="section-padding bg-dark-blue">
+        <div class="container">
+            <div class="row justify-content-center mb-60">
+                <div class="col-lg-8 text-center">
+                    <div class="passenger-badge mb-3">
+                        <span>🚀 SERVIÇO DE MOTO-TÁXI OX4</span>
+                    </div>
+                    <h2 class="text-white mb-4" style="font-size: 2.8rem; font-weight: 800;">
+                        Moto-Táxis <span style="color: #4a6cf7;">Próprios</span> da OX4
+                    </h2>
+                    <p class="lead text-light opacity-75">
+                        Todas as nossas motos são da OX4, garantindo padrões de qualidade, manutenção regular e
+                        segurança máxima para você.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card text-center">
+                        <div class="mb-4"
+                            style="width: 80px; height: 80px; background: linear-gradient(135deg, #4a6cf7, #3a6de5); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                            <i class="fas fa-motorcycle text-white" style="font-size: 2.2rem;"></i>
+                        </div>
+                        <h4 class="text-white mb-3">Moto-Táxi Rápido</h4>
+                        <p class="text-light opacity-75">
+                            Transporte rápido e eficiente com nossas próprias motos. Ideal para evitar trânsito e chegar
+                            rápido.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card text-center">
+                        <div class="mb-4"
+                            style="width: 80px; height: 80px; background: linear-gradient(135deg, #00b894, #00a085); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                            <i class="fas fa-shield-alt text-white" style="font-size: 2.2rem;"></i>
+                        </div>
+                        <h4 class="text-white mb-3">Segurança Garantida</h4>
+                        <p class="text-light opacity-75">
+                            Todas as nossas motos são equipadas com capacetes de qualidade e seguem manutenção regular.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card text-center">
+                        <div class="mb-4"
+                            style="width: 80px; height: 80px; background: linear-gradient(135deg, #ff9f43, #ff8c00); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                            <i class="fas fa-bolt text-white" style="font-size: 2.2rem;"></i>
+                        </div>
+                        <h4 class="text-white mb-3">Motoristas Treinados</h4>
+                        <p class="text-light opacity-75">
+                            Nossos motociclistas passam por rigorosa seleção e treinamento para sua segurança.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vantagens OX4 com Imagem -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="passenger-badge mb-3">
+                        <span>⭐ PORQUE ESCOLHER OX4 MOTO-TÁXI</span>
+                    </div>
+                    <h2 class="text-white mb-4" style="font-size: 2.8rem; font-weight: 800;">
+                        Acabou a espera nas<br>
+                        <span style="color: #4a6cf7;">paragens na rua</span>
+                    </h2>
+
+                    <div class="mb-4">
+                        <div class="feature-box mb-4">
+                            <h5 class="text-white mb-2">Motos Próprias da OX4</h5>
+                            <p class="text-light opacity-75 mb-0">
+                                Todas as motos são da OX4, garantindo qualidade, manutenção e segurança máxima.
+                            </p>
+                        </div>
+
+                        <div class="feature-box mb-4">
+                            <h5 class="text-white mb-2">Preços Transparentes</h5>
+                            <p class="text-light opacity-75 mb-0">
+                                Sabes o custo da tua viagem antes mesmo de pedir. Sem surpresas, sem discussões.
+                            </p>
+                        </div>
+
+                        <div class="feature-box">
+                            <h5 class="text-white mb-2">Motoristas Verificados</h5>
+                            <p class="text-light opacity-75 mb-0">
+                                Todos os nossos motociclistas passam por verificações rigorosas e treinamento
+                                especializado.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="image-hover-effect">
+                        <img style="height: 600px;" src="{% static 'assets1/images/pricing/rua.png' %}"
+                            alt="Moto-táxi OX4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria de Motos OX4 -->
+    <section class="section-padding bg-dark-blue">
+        <div class="container">
+            <div class="row justify-content-center mb-60">
+                <div class="col-lg-8 text-center">
+                    <div class="passenger-badge mb-3">
+                        <span>🏍️ NOSSA FROTA DE MOTOS</span>
+                    </div>
+                    <h2 class="text-white mb-4" style="font-size: 2.8rem; font-weight: 800;">
+                        Conheça nossas <span style="color: #4a6cf7;">Motos</span>
+                    </h2>
+                    <p class="lead text-light opacity-75">
+                        Nossa frota própria é cuidadosamente mantida para garantir sua segurança e conforto
+                    </p>
+                </div>
+            </div>
+
+            <div class="gallery-slider">
+                <!-- Slides da galeria -->
+                <div class="gallery-slide active"
+                    style="background-image: url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');">
+                </div>
+                <div class="gallery-slide"
+                    style="background-image: url('https://images.unsplash.com/photo-1517846693594-1567da72af75?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');">
+                </div>
+                <div class="gallery-slide"
+                    style="background-image: url('https://images.unsplash.com/photo-1558981403-c5f9899a28bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');">
+                </div>
+
+                <!-- Controles -->
+                <div class="gallery-controls">
+                    <button class="gallery-btn prev-btn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="gallery-btn next-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="row mt-60 g-4">
+                <div class="col-md-4">
+                    <div class="feature-box text-center h-100">
+                        <i class="fas fa-cogs mb-4" style="font-size: 2.5rem; color: #4a6cf7;"></i>
+                        <h5 class="text-white mb-3">Manutenção Regular</h5>
+                        <p class="text-light opacity-75 mb-0">Todas as motos passam por manutenção preventiva semanal
+                            para garantir segurança</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-box text-center h-100">
+                        <i class="fas fa-shield-alt mb-4" style="font-size: 2.5rem; color: #00b894;"></i>
+                        <h5 class="text-white mb-3">Segurança Total</h5>
+                        <p class="text-light opacity-75 mb-0">Equipamentos de segurança incluídos em todas as viagens
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-box text-center h-100">
+                        <i class="fas fa-gas-pump mb-4" style="font-size: 2.5rem; color: #ff9f43;"></i>
+                        <h5 class="text-white mb-3">Baixo Consumo</h5>
+                        <p class="text-light opacity-75 mb-0">Motos econômicas que reduzem custos para você</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style></style>
+
+    <!-- Como Funciona -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="moto-animation-container">
+                        <div class="moto-riding">
+                            <img src="{% static 'assets1/images/pricing/rua.png' %}" alt="Rua - OX4 Moto-Táxi"
+                                class="img-responsive-road">
+                            <!-- Elemento decorativo animado -->
+                            <div class="moto-floating">
+                                <i class="fas fa-motorcycle" style="color: #4a6cf7; font-size: 2.5rem;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="passenger-badge mb-3">
+                        <span>📱 COMO FUNCIONA</span>
+                    </div>
+                    <h2 class="text-white mb-4" style="font-size: 2.8rem; font-weight: 800;">
+                        3 Passos para sua <span style="color: #4a6cf7;">Viagem</span>
+                    </h2>
+
+                    <div class="mb-4">
+                        <div class="feature-box mb-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div
+                                    style="width: 35px; height: 35px; background: #4a6cf7; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px; font-weight: bold; font-size: 1.2rem;">
+                                    1</div>
+                                <h5 class="text-white mb-0">Baixe o App</h5>
+                            </div>
+                            <p class="text-light opacity-75 mb-0 ps-5">
+                                Baixe gratuitamente o app OX4 na App Store ou Google Play
+                            </p>
+                        </div>
+
+                        <div class="feature-box mb-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div
+                                    style="width: 35px; height: 35px; background: #4a6cf7; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px; font-weight: bold; font-size: 1.2rem;">
+                                    2</div>
+                                <h5 class="text-white mb-0">Escolha seu Destino</h5>
+                            </div>
+                            <p class="text-light opacity-75 mb-0 ps-5">
+                                Digite seu destino e confirme a localização de partida
+                            </p>
+                        </div>
+
+                        <div class="feature-box">
+                            <div class="d-flex align-items-center mb-3">
+                                <div
+                                    style="width: 35px; height: 35px; background: #4a6cf7; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px; font-weight: bold; font-size: 1.2rem;">
+                                    3</div>
+                                <h5 class="text-white mb-0">Aguarde a Moto</h5>
+                            </div>
+                            <p class="text-light opacity-75 mb-0 ps-5">
+                                Em poucos minutos nossa moto-táxi estará com você
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Container para a imagem da rua */
+        .moto-animation-container {
+            position: relative;
+            height: 450px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: rgba(0, 28, 51, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(74, 108, 247, 0.3);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            padding: 15px;
+        }
+
+        .moto-riding {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .img-responsive-road {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: all 0.5s ease;
+            filter: brightness(1.05) contrast(1.05) saturate(1.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .img-responsive-road:hover {
+            transform: scale(1.03);
+            filter: brightness(1.1) contrast(1.1) saturate(1.2);
+        }
+
+        /* Moto flutuante animada */
+        .moto-floating {
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            animation: motoDrive 8s linear infinite;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 10px;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(74, 108, 247, 0.5);
+            box-shadow: 0 0 20px rgba(74, 108, 247, 0.4);
+        }
+
+        @keyframes motoDrive {
+            0% {
+                transform: translateX(-100px) translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateX(500px) translateY(20px) rotate(5deg);
+                opacity: 0;
+            }
+        }
+
+        /* Efeito de estrada */
+        .road-effect {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(to top, rgba(0, 40, 65, 0.8), transparent);
+            z-index: 1;
+            border-radius: 0 0 15px 15px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 991px) {
+            .moto-animation-container {
+                height: 350px;
+                margin-bottom: 40px;
+            }
+
+            .moto-floating {
+                width: 50px;
+                height: 50px;
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .moto-animation-container {
+                height: 300px;
+            }
+
+            .moto-floating {
+                width: 45px;
+                height: 45px;
+                font-size: 1.5rem;
+                top: 15%;
+            }
+        }
+    </style>
+
+    <!-- Segurança OX4 -->
+    <section class="section-padding bg-dark-blue">
+        <div class="container">
+            <div class="row justify-content-center mb-60">
+                <div class="col-lg-8 text-center">
+                    <div class="passenger-badge mb-3">
+                        <span>🛡️ SEGURANÇA EM PRIMEIRO LUGAR</span>
+                    </div>
+                    <h2 class="text-white mb-4" style="font-size: 2.8rem; font-weight: 800;">
+                        Sua <span style="color: #4a6cf7;">Segurança</span> é nossa Prioridade
+                    </h2>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card text-center">
+                        <div class="mb-4"
+                            style="width: 80px; height: 80px; background: linear-gradient(135deg, #4a6cf7, #3a6de5); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                            <i class="fas fa-user-shield text-white" style="font-size: 2.2rem;"></i>
+                        </div>
+                        <h4 class="text-white mb-3">Motoristas Verificados</h4>
+                        <p class="text-light opacity-75">
+                            Todos os motociclistas passam por rigorosa seleção, verificação de antecedentes e
+                            treinamento.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card text-center">
+                        <div class="mb-4"
+                            style="width: 80px; height: 80px; background: linear-gradient(135deg, #00b894, #00a085); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                            <i class="fas fa-helmet-safety text-white" style="font-size: 2.2rem;"></i>
+                        </div>
+                        <h4 class="text-white mb-3">Capacetes de Qualidade</h4>
+                        <p class="text-light opacity-75">
+                            Fornecemos capacetes certificados para todos os passageiros em todas as viagens.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card text-center">
+                        <div class="mb-4"
+                            style="width: 80px; height: 80px; background: linear-gradient(135deg, #ff9f43, #ff8c00); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                            <i class="fas fa-car-crash text-white" style="font-size: 2.2rem;"></i>
+                        </div>
+                        <h4 class="text-white mb-3">Seguro de Viagem</h4>
+                        <p class="text-light opacity-75">
+                            Todas as viagens têm cobertura de seguro para sua tranquilidade.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos com Imagem -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="image-hover-effect">
+                        <img style="height: 700px;"
+                            src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                            alt="Cliente satisfeito com OX4">
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="passenger-badge mb-3">
+                        <span>💬 O QUE PENSAM DA OX4</span>
+                    </div>
+                    <h2 class="text-white mb-4" style="font-size: 2.8rem; font-weight: 800;">
+                        Depoimentos de <span style="color: #4a6cf7;">Clientes</span>
+                    </h2>
+
+                    <div class="review-card mb-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div
+                                style="width: 45px; height: 45px; background: linear-gradient(135deg, #4a6cf7, #3a6de5); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                                <span class="text-white" style="font-weight: bold;">J</span>
+                            </div>
+                            <div>
+                                <h6 class="mb-0 text-white">João Silva</h6>
+                                <small class="text-light opacity-75">Cliente há 6 meses</small>
+                            </div>
+                        </div>
+                        <p class="text-light opacity-75 mb-0">
+                            "As motos da OX4 são muito bem cuidadas e os motoristas são profissionais. Sempre chego
+                            rápido ao trabalho! Melhor serviço de moto-táxi de Luanda."
+                        </p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <div
+                                style="width: 45px; height: 45px; background: linear-gradient(135deg, #00b894, #00a085); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                                <span class="text-white" style="font-weight: bold;">M</span>
+                            </div>
+                            <div>
+                                <h6 class="mb-0 text-white">Maria Santos</h6>
+                                <small class="text-light opacity-75">Cliente há 1 ano</small>
+                            </div>
+                        </div>
+                        <p class="text-light opacity-75 mb-0">
+                            "Uso a OX4 todos os dias para ir ao trabalho. As motos são confortáveis, sempre têm
+                            capacetes limpos e os preços são justos. Recomendo a todos!"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Baixar App -->
+    <section class="section-padding bg-darker-blue">
+        <div class="container">
+            <div class="row justify-content-center mb-60">
+                <div class="col-lg-8 text-center">
+                    <div class="passenger-badge mb-3">
+                        <span>📱 COMEÇA A USAR HOJE</span>
+                    </div>
+                    <h2 class="text-white mb-4" style="font-size: 2.8rem; font-weight: 800;">
+                        Primeira viagem <span style="color: #4a6cf7;">grátis</span>!
+                    </h2>
+                    <p class="lead text-light opacity-75">
+                        Baixa a app, regista-te e ganha uma viagem grátis no moto-táxi OX4.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="row g-4">
+                        <div class="col-6 text-center">
+                            <a href="#" class="d-block text-decoration-none">
+                                <div
+                                    style="background: white; border-radius: 18px; padding: 25px; transition: all 0.3s ease; box-shadow: 0 15px 30px rgba(0,0,0,0.2); border: 2px solid rgba(255,255,255,0.1);">
+                                    <i class="fab fa-apple"
+                                        style="font-size: 3.5rem; color: #002841; margin-bottom: 15px;"></i>
+                                    <h5 class="mb-0" style="color: #002841; font-weight: 600;">App Store</h5>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-6 text-center">
+                            <a href="#" class="d-block text-decoration-none">
+                                <div
+                                    style="background: white; border-radius: 18px; padding: 25px; transition: all 0.3s ease; box-shadow: 0 15px 30px rgba(0,0,0,0.2); border: 2px solid rgba(255,255,255,0.1);">
+                                    <i class="fab fa-google-play"
+                                        style="font-size: 3.5rem; color: #002841; margin-bottom: 15px;"></i>
+                                    <h5 class="mb-0" style="color: #002841; font-weight: 600;">Google Play</h5>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 text-center">
+                        <h5 class="text-white mb-3">Ou escaneie o código QR</h5>
+                        <div
+                            style="width: 180px; height: 180px; background: white; border-radius: 15px; margin: 0 auto; padding: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.3);">
+                            <div
+                                style="width: 100%; height: 100%; background: #002841; border-radius: 5px; display: flex; align-items: center; justify-content: center;">
+                                <div style="text-align: center;">
+                                    <i class="fas fa-qrcode" style="font-size: 4rem; color: white; opacity: 0.8;"></i>
+                                    <small class="text-white d-block mt-2">OX4 Moto-Táxi</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 text-center mt-5 mt-lg-0">
+                    <div class="app-preview">
+                        <div class="phone-frame">
+                            <div
+                                style="background: #001c33; border-radius: 25px; overflow: hidden; height: 550px; position: relative;">
+                                <div
+                                    style="background: linear-gradient(135deg, #4a6cf7, #3a6de5); padding: 20px; text-align: center;">
+                                    <h5 class="mb-0 text-white">OX4 Moto-Táxi</h5>
+                                </div>
+                                <div
+                                    style="padding: 30px; text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: center;">
+                                    <i class="fas fa-motorcycle"
+                                        style="font-size: 4.5rem; color: #4a6cf7; margin-bottom: 25px; animation: motoFloat 3s ease-in-out infinite;"></i>
+                                    <h4 class="text-white mb-3">Moto em 5 minutos</h4>
+                                    <p class="text-light opacity-75 mb-4">
+                                        Nossas motos próprias chegam rapidamente ao seu local. Segurança e rapidez
+                                        garantidas!
+                                    </p>
+                                    <div
+                                        style="background: rgba(74, 108, 247, 0.2); border-radius: 15px; padding: 15px; border: 1px solid rgba(74, 108, 247, 0.3);">
+                                        <small class="text-light opacity-75">Tempo médio de espera: 5-7 minutos</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (mantido igual) -->
+    <section class="si__fotter__area bg" style="background: #001529;">
+        <!-- ... footer mantido igual ... -->
+    </section>
+
+    <!-- JavaScript para os Sliders -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Hero Slider
+            const heroSlides = document.querySelectorAll('.hero-slide');
+            const heroIndicators = document.querySelectorAll('.slider-indicator');
+            let currentHeroSlide = 0;
+
+            function showHeroSlide(n) {
+                heroSlides.forEach(slide => slide.classList.remove('active'));
+                heroIndicators.forEach(indicator => indicator.classList.remove('active'));
+
+                currentHeroSlide = (n + heroSlides.length) % heroSlides.length;
+
+                heroSlides[currentHeroSlide].classList.add('active');
+                heroIndicators[currentHeroSlide].classList.add('active');
+            }
+
+            // Auto-rotate hero slider
+            setInterval(() => {
+                showHeroSlide(currentHeroSlide + 1);
+            }, 5000);
+
+            // Hero indicators click
+            heroIndicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    showHeroSlide(index);
+                });
+            });
+
+            // Gallery Slider
+            const gallerySlides = document.querySelectorAll('.gallery-slide');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            let currentGallerySlide = 0;
+
+            function showGallerySlide(n) {
+                gallerySlides.forEach(slide => slide.classList.remove('active'));
+
+                currentGallerySlide = (n + gallerySlides.length) % gallerySlides.length;
+                gallerySlides[currentGallerySlide].classList.add('active');
+            }
+
+            prevBtn.addEventListener('click', () => {
+                showGallerySlide(currentGallerySlide - 1);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                showGallerySlide(currentGallerySlide + 1);
+            });
+
+            // Auto-rotate gallery slider
+            setInterval(() => {
+                showGallerySlide(currentGallerySlide + 1);
+            }, 4000);
+        });
+    </script>
+
+    <!-- JS Here -->
+    {% include 'include/java.html' %}
+
+</body>
+
+</html>

@@ -1,0 +1,208 @@
+{% load static %}
+<section id="header-sticky" class="si__header__area">
+        <div class="container custom__container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="si__header__logo">
+                        <a href="index.html">
+                            <img style="width: 120px;"
+                                src="{% static 'assets1/images/Colorful Modern Infinity Creative Studio Logo.png' %}"
+                                alt="logo">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="si__header__content">
+                        <div class="si__header__menubar">
+                            <div class="si__header__menu">
+                                <ul>
+                                    <li class="current__item">
+                                        <a href="{% url 'homesite' %}">Home</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'passageiro' %}">Passageiros</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'motoqueiro' %}">Motoqueiros</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Empresa <i class="fa-light fa-chevron-down"></i></a>
+                                        <ul class="sub__menu">
+                                            <li><a href="{% url 'sobresite' %}">Sobre Nós</a></li>
+                                            <li><a href="team.html">Equipe</a></li>
+                                            <li><a href="faq.html">FAQ</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">Parceiro</a>
+                                    </li>
+                                    <li>
+                                        <a href="contact.html">Contato</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="si__header__right">
+                            <div class="search-box-btn search-box-outer">
+                                <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+                            </div>
+                            <div class="nav-btn navSidebar-button si__header__offcanvas__bar">
+                                <div class="si__header__offcanvas__bar__inner">
+                                    <span class="line-one"></span>
+                                    <span class="line-two"></span>
+                                    <span class="line-three"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Offcanvas -->
+    <section class="xs-sidebar-group info-group">
+        <div class="dt-overlay bt-black"></div>
+        <div class="dt-sidebar-widget">
+            <div class="sidebar-container">
+                <div class="widget-top">
+                    <a style="background-color: #2e3f6e;" href="index.html#" class="close">
+                        X
+                    </a>
+                </div>
+                <div class="sidebar-textwidget">
+                    <!-- Sidebar Info Content -->
+                    <section class="sidebar-info-contents">
+                        <div class="content-inner">
+                            <div class="logo">
+                                <a href="index.html"><img style="width: 150px;"
+                                        src="{% static 'assets1/images/Logotipo 1.png' %}" alt="" /></a>
+                            </div>
+                            <div class="content-text">
+                                <h2>Sobre nós</h2>
+                                <p class="text-white">
+                                    Somos especialistas em tornar suas viagens mais seguras e confortáveis. Nossa missão
+                                    é oferecer soluções práticas para você explorar o mundo com tranquilidade e
+                                    confiança.
+                                </p>
+                            </div>
+
+                            <div class="contact-info">
+                                <h2>Contacte-nos</h2>
+                                <ul>
+                                    <li> <i style="background-color: #2e3f6e;" class="fa-light fa-location-dot"></i>
+                                        Talatona, Luanda, Angola </li>
+                                    <li> <i style="background-color: #2e3f6e;" class="fa-light fa-phone"></i> <a
+                                            href="tel:+923908353"> +923 908 353 </a> </li>
+                                    <li> <i style="background-color: #2e3f6e;" class="fa-light fa-envelope"></i> <a
+                                            href="mailto:info-ox4@adsgroup-nsd.com"> info-ox4@adsgroup-nsd.com </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </section>
+                    <!-- Social Box -->
+                    <div class="social-icon pt-40">
+                        <ul>
+                            <li>
+                                <a style="background-color: #2e3f6e;" href="index.html#"><i
+                                        class="fab fa-facebook-f"></i></a>
+                            </li>
+                            <li>
+                                <a style="background-color: #2e3f6e;" href="index.html#"><i
+                                        class="fa-brands fa-instagram"></i></a>
+                            </li>
+                            <li>
+                                <a style="background-color: #2e3f6e;" href="index.html#"><i
+                                        class="fab fa-pinterest"></i></a>
+                            </li>
+                            <li>
+                                <a style="background-color: #2e3f6e;" href="index.html#"><i
+                                        class="fab fa-linkedin-in"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Offcanvas -->
+
+    <!-- Mobile Menu Area -->
+    <section class="si__mobilemenu__area" style="background-color: #2e3f6e;">
+        <div class="mobile-menu">
+            <nav class="si_menu">
+                <ul style="color: #ffffff;">
+                    <li><a href="index.html" style="color: #ffffff;"> Home </a>
+
+                    </li>
+                    <li><a href="{% url 'passageiro' %}" style="color: #ffffff;"> Passageiros</a></li>
+                    <li><a href="{% url 'motoqueiro' %}" style="color: #ffffff;"> motoqueiro</a></li>
+
+
+                    <li><a href="index.html#" style="color: #ffffff;"> Páginas </a>
+                        <ul class="sub__menu">
+                            <li><a href="about-us.html" style="color: #ffffff;"> Sobre Nós </a></li>
+                            <li><a href="team.html" style="color: #ffffff;"> Equipe </a></li>
+                            <li><a href="faq.html" style="color: #ffffff;"> FAQ </a></li>
+                        </ul>
+                    </li>
+                    <li><a href="index.html#" style="color: #ffffff;"> Serviços </a>
+                        <ul class="sub__menu">
+                            <li><a href="service.html" style="color: #ffffff;"> Serviços </a></li>
+                            <li><a href="service-details.html" style="color: #ffffff;"> Detalhes do Serviço </a></li>
+                        </ul>
+                    </li>
+                    <li><a href="index.html#" style="color: #ffffff;"> Projetos </a>
+                        <ul class="sub__menu">
+                            <li><a href="project.html" style="color: #ffffff;"> Projetos </a></li>
+                            <li><a href="project-details.html" style="color: #ffffff;"> Detalhes do Projeto </a></li>
+                        </ul>
+                    </li>
+                    <li><a href="index.html#" style="color: #ffffff;"> Blog </a>
+                        <ul class="sub__menu">
+                            <li><a href="blog.html" style="color: #ffffff;"> Blog </a></li>
+                            <li><a href="blog-details.html" style="color: #ffffff;"> Detalhes do Blog </a></li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html" style="color: #ffffff;"> Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+
+    <style>
+        /* Hover efeito mais claro para destacar links */
+        .si__mobilemenu__area ul li a:hover {
+            color: #a8c0ff;
+            /* tom de azul claro */
+            transition: color 0.3s;
+        }
+
+        .si__mobilemenu__area ul li ul li a:hover {
+            color: #cbdcff;
+            /* submenu hover ainda mais claro */
+        }
+
+        /* Remove vermelho do item ativo */
+        .si__mobilemenu__area ul li.current__item>a {
+            color: #ffffff !important;
+            /* força o branco */
+        }
+
+        /* Hover efeito mais claro para destacar links */
+        .si__mobilemenu__area ul li a:hover {
+            color: #a8c0ff !important;
+            /* tom de azul claro */
+            transition: color 0.3s;
+        }
+
+        /* Hover submenu */
+        .si__mobilemenu__area ul li ul li a:hover {
+            color: #cbdcff !important;
+        }
+    </style>
+
+

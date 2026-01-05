@@ -1,0 +1,1502 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> OX4 Transporte - Motoqueiros </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% include 'include/css.html' %}
+
+    <style>
+        .si__slider__five__area {
+            padding: 120px 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, #2e3f6e 0%, #1a2332 100%);
+        }
+
+        .badge-animated {
+            display: inline-block;
+            background: linear-gradient(90deg, #ffb400, #ff7e00);
+            padding: 8px 20px;
+            border-radius: 50px;
+            animation: pulse 2s infinite;
+        }
+
+        .badge-text {
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Slider de motoqueiros */
+        .motoqueiros-slider-container {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 25px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .motoqueiros-track {
+            display: flex;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 300%;
+            /* 3 imagens = 300% */
+            height: 100%;
+            transition: transform 1s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        .motoqueiro-slide {
+            width: 33.333%;
+            /* Cada slide ocupa 1/3 da track */
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            opacity: 0.7;
+            transform: scale(0.9);
+            transition: all 1s cubic-bezier(0.65, 0, 0.35, 1);
+            border-radius: 20px;
+        }
+
+        .motoqueiro-slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 2;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .motoqueiro-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slide-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(26, 35, 50, 0.95));
+            padding: 25px;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.5s 0.3s;
+        }
+
+        .motoqueiro-slide.active .slide-info {
+            transform: translateY(0);
+        }
+
+        .slide-badge {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: #4a6cf7;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: all 0.5s 0.5s;
+        }
+
+        .motoqueiro-slide.active .slide-badge {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .slide-info h5 {
+            font-weight: 700;
+            margin-bottom: 5px;
+            font-size: 1.5rem;
+        }
+
+        .slide-info p {
+            opacity: 0.9;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .slide-rating {
+            color: #ffb400;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        /* Controles do slider */
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .slider-dot.active {
+            background: #4a6cf7;
+            transform: scale(1.3);
+        }
+
+        .slider-progress {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-top: 20px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #4a6cf7;
+            width: 0%;
+            transition: width 6s linear;
+        }
+
+        .progress-bar.running {
+            animation: progress 6s linear forwards;
+        }
+
+        @keyframes progress {
+            0% {
+                width: 0%;
+            }
+
+            100% {
+                width: 100%;
+            }
+        }
+
+        /* Feature items */
+        .feature-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 50px;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .feature-item:hover {
+            background: rgba(255, 180, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Responsividade */
+        @media (max-width: 991px) {
+            .si__slider__five__area {
+                padding: 80px 0;
+            }
+
+            .motoqueiros-slider-container {
+                height: 400px;
+                margin-top: 30px;
+            }
+
+            h1 {
+                font-size: 2.8rem !important;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .motoqueiros-slider-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    {% include 'include/loading.html' %}
+
+    <!-- SI Header Area -->
+    {% include 'include/menusite.html' %}
+
+    <section class="si__slider__five__area position-relative">
+        <div class="container custom__container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="si__slider__five__content mb-5">
+                        
+
+                        <h1 class="text-white mb-4" style="font-size: 3.5rem; font-weight: 800; line-height: 1.1;">
+                            Seja um <span style="color: #4a6cf7;">Parceiro</span> OX4
+                            <br><span style="border-bottom: 5px solid #00c8ff;">Ganhe Mais</span> com Flexibilidade
+                        </h1>
+
+                        <p class="lead text-light mb-5 opacity-75" style="font-size: 1.2rem; max-width: 550px;">
+                            Junte-se à nossa rede de motoqueiros profissionais. Tenha liberdade para trabalhar no seu
+                            ritmo,
+                            com segurança garantida e suporte 24/7.
+                        </p>
+
+                        <div class="features-highlight d-flex flex-wrap gap-4 mb-5">
+                            <div class="feature-item text-white">
+                                <i class="fas fa-money-bill-wave me-2 text-success"></i> Ganhos até 30% maiores
+                            </div>
+                            <div class="feature-item text-white">
+                                <i class="fas fa-clock me-2 text-primary"></i> Horários flexíveis
+                            </div>
+                            <div class="feature-item text-white">
+                                <i class="fas fa-shield-alt me-2 text-warning"></i> Seguro gratuito
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="si__slider__five__box d-flex align-items-center gap-4">
+                        <a class="btn btn-primary btn-lg px-5 py-3" href="#"
+                            style="border-radius: 15px; background: #4a6cf7; border: none; font-weight: 600;">
+                            <i class="fas fa-user-plus me-2"></i> Cadastre-se
+                        </a>
+                        <a class="btn btn-outline-light btn-lg px-4 py-3" href="#" style="border-radius: 15px;">
+                            <i class="fas fa-play-circle me-2"></i> Como funciona
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="motoqueiros-slider-container">
+                        <div class="motoqueiros-track" id="sliderTrack">
+                            <!-- Slide 1 (Ativo inicialmente) -->
+                            <div class="motoqueiro-slide active" data-slide="0">
+                                <img src="{% static 'assets1/images/pricing/corrida.png' %}" alt="Motoqueiro 1">
+                                <div class="slide-badge">TOP 1%</div>
+                                <div class="slide-info">
+                                    <h5>Carlos Silva</h5>
+                                    <p>2 anos na plataforma • São Paulo - SP</p>
+                                    <div class="slide-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        4.8 • +2.000 corridas
+                                    </div>
+                                    <small>"A OX4 me deu liberdade financeira e horários flexíveis!"</small>
+                                </div>
+                            </div>
+
+                            <!-- Slide 2 -->
+                            <div class="motoqueiro-slide" data-slide="1">
+                                <img src="{% static 'assets1/images/pricing/rua.png' %}" alt="Motoqueiro 2">
+                                <div class="slide-badge" style="background: #ff7e00;">+5K CORRIDAS</div>
+                                <div class="slide-info">
+                                    <h5>Ana Costa</h5>
+                                    <p>1 ano na plataforma • Rio de Janeiro - RJ</p>
+                                    <div class="slide-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        5.0 • +5.000 corridas
+                                    </div>
+                                    <small>"O melhor aplicativo para quem quer trabalhar com moto!"</small>
+                                </div>
+                            </div>
+
+                            <!-- Slide 3 -->
+                            <div class="motoqueiro-slide" data-slide="2">
+                                <img src="{% static 'assets1/images/pricing/rua.png' %}" alt="Motoqueiro 3">
+                                <div class="slide-badge" style="background: #00b894;">NOVO PARCEIRO</div>
+                                <div class="slide-info">
+                                    <h5>Roberto Santos</h5>
+                                    <p>6 meses na plataforma • Belo Horizonte - MG</p>
+                                    <div class="slide-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        5.0 • +800 corridas
+                                    </div>
+                                    <small>"Em 6 meses já alcancei minha meta financeira mensal!"</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slider-progress">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+
+                    <div class="slider-controls">
+                        <div class="slider-dot active" data-slide="0"></div>
+                        <div class="slider-dot" data-slide="1"></div>
+                        <div class="slider-dot" data-slide="2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="si__about__three__area pt-120 pb-120">
+        <div class="container custom__width__three">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="si__about__three__right">
+                        <div class="si__about__three__thumb"
+                            style="position: relative; overflow: hidden; border-radius: 20px;">
+                            <img src="{% static 'assets1/images/pricing/corrida.png' %}" alt="Motoqueiro OX4" style="width: 100%; 
+                        height: auto; 
+                        max-height: 500px; 
+                        object-fit: cover;
+                        border-radius: 20px;
+                        box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+                        transition: transform 0.5s ease;">
+
+                            <!-- Overlay decorativo -->
+                            <div style="position: absolute; 
+                       top: 0; 
+                       left: 0; 
+                       width: 100%; 
+                       height: 100%; 
+                       background: linear-gradient(45deg, rgba(74, 108, 247, 0.1) 0%, rgba(255, 180, 0, 0.05) 100%); 
+                       pointer-events: none;
+                       border-radius: 20px;">
+                            </div>
+
+                            <!-- Badge flutuante -->
+                            <div style="position: absolute; 
+                       top: 20px; 
+                       right: 20px; 
+                       background: #4a6cf7; 
+                       color: white; 
+                       padding: 10px 20px; 
+                       border-radius: 30px;
+                       font-weight: 600;
+                       font-size: 0.9rem;
+                       box-shadow: 0 10px 20px rgba(74, 108, 247, 0.3);">
+                                <i class="fas fa-motorcycle me-2"></i>PARCEIRO OX4
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Efeito hover adicional -->
+                <style>
+                    .si__about__three__thumb:hover img {
+                        transform: scale(1.03);
+                    }
+
+                    .si__about__three__thumb {
+                        cursor: pointer;
+                    }
+
+                    /* Ajuste responsivo */
+                    @media (max-width: 768px) {
+                        .si__about__three__thumb img {
+                            max-height: 400px;
+                        }
+                    }
+
+                    @media (max-width: 576px) {
+                        .si__about__three__thumb img {
+                            max-height: 300px;
+                        }
+                    }
+                </style>
+                <div class="col-lg-6">
+                    <div class=" si__three__section__title si__title mb-52">
+                        <h5>About us</h5>
+                        <h1 class=" text-anime-style-3">Escolhe como <span>conduzes, ganhos reais para cada viagem.</h1>
+                        <p>Choose Marketi for unparalleled digital success – where expertise, innovation, and strategic
+                            brilliance converge</p>
+                    </div>
+                    <div class="si__about__three__main">
+                        <div class="si__about__three__box">
+                            <div class="si__about__three__icon">
+                                <a href="index-three.html#"><img src="{% static 'assets1/images/about/img1.png' %}"
+                                        alt=""></a>
+                            </div>
+                            <div class="si__about__three__content">
+                                <h1 class="counter">7</h1>
+                                <h2>k+</h2>
+                                <span>Satisfied Clients</span>
+                            </div>
+                        </div>
+                        <div class="si__about__three__box">
+                            <div class="si__about__three__icon">
+                                <a href="index-three.html#"><img src="{% static 'assets1/images/about/img2.png' %}"
+                                        alt=""></a>
+                            </div>
+                            <div class="si__about__three__content">
+                                <h1 class="counter">500</h1>
+                                <h2>+</h2>
+                                <span>Experienced Team</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="si__about__three__box__two">
+                        <div class="si__about__three__btn">
+                            <a class="si__btn2" href="index-three.html#">More About </a>
+                        </div>
+                        <div class="si__about__three__img">
+                            <img src="assets/images/about/img3.png" alt="">
+                        </div>
+                        <div class="si__about__three__text">
+                            <img src="assets/images/about/text.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="si__features__area pt-120 pb-120" style="background: #002841;">
+    <div class="container custom__container">
+        <!-- Cabeçalho -->
+        <div class="row justify-content-center mb-60">
+            <div class="col-lg-8 text-center">
+                <div class="badge-animated mb-4" style="background: linear-gradient(90deg, #4a6cf7, #3a6de5);">
+                    <span class="badge-text">🏍️ VANTAGENS EXCLUSIVAS</span>
+                </div>
+                <h1 class="text-white mb-4" style="font-size: 3rem; font-weight: 800;">
+                    Como é ser um <span style="color: #4a6cf7;">motorista</span> OX4?
+                </h1>
+                <p class="lead text-light opacity-75" style="font-size: 1.2rem;">
+                    Descubra por que somos a escolha preferida dos melhores motoqueiros da cidade
+                </p>
+            </div>
+        </div>
+
+        <!-- Grid de Benefícios -->
+        <div class="row g-4">
+            <!-- Benefício 1 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="benefit-card" style="background: rgba(255, 255, 255, 0.05); 
+                                                backdrop-filter: blur(10px);
+                                                border: 1px solid rgba(255, 255, 255, 0.1);
+                                                border-radius: 20px;
+                                                padding: 30px;
+                                                height: 100%;
+                                                transition: all 0.3s ease;">
+                    <div class="benefit-icon mb-4" style="width: 60px; 
+                                                         height: 60px; 
+                                                         background: linear-gradient(135deg, #4a6cf7, #3a6de5);
+                                                         border-radius: 15px;
+                                                         display: flex;
+                                                         align-items: center;
+                                                         justify-content: center;">
+                        <i class="fas fa-trophy" style="font-size: 1.5rem; color: white;"></i>
+                    </div>
+                    <h3 class="text-white mb-3" style="font-weight: 700;">Bónus semanais</h3>
+                    <p class="text-light opacity-75 mb-4">
+                        Ganha dinheiro extra se fizeres um determinado número de viagens por semana
+                    </p>
+                    <div class="highlight-box" style="background: rgba(74, 108, 247, 0.1); 
+                                                    padding: 15px;
+                                                    border-radius: 10px;
+                                                    border-left: 4px solid #4a6cf7;">
+                        <h4 class="text-white mb-0" style="font-weight: 600;">
+                            <span style="color: #4a6cf7;">Ganha até 1M</span> por mês
+                        </h4>
+                        <small class="text-light opacity-75">Potencial máximo com bónus incluídos</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefício 2 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="benefit-card" style="background: rgba(255, 255, 255, 0.05); 
+                                                backdrop-filter: blur(10px);
+                                                border: 1px solid rgba(255, 255, 255, 0.1);
+                                                border-radius: 20px;
+                                                padding: 30px;
+                                                height: 100%;
+                                                transition: all 0.3s ease;">
+                    <div class="benefit-icon mb-4" style="width: 60px; 
+                                                         height: 60px; 
+                                                         background: linear-gradient(135deg, #4a6cf7, #3a6de5);
+                                                         border-radius: 15px;
+                                                         display: flex;
+                                                         align-items: center;
+                                                         justify-content: center;">
+                        <i class="fas fa-motorcycle" style="font-size: 1.5rem; color: white;"></i>
+                    </div>
+                    <h3 class="text-white mb-3" style="font-weight: 700;">As motos são nossas</h3>
+                    <p class="text-light opacity-75 mb-4">
+                        Trabalhe com nossa frota própria - sem preocupações com manutenção ou documentação
+                    </p>
+                    <div class="highlight-box" style="background: rgba(74, 108, 247, 0.1); 
+                                                    padding: 15px;
+                                                    border-radius: 10px;
+                                                    border-left: 4px solid #4a6cf7;">
+                        <h4 class="text-white mb-0" style="font-weight: 600;">
+                            Sem custos de <span style="color: #4a6cf7;">manutenção</span>
+                        </h4>
+                        <small class="text-light opacity-75">Toda a frota mantida pela OX4</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefício 3 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="benefit-card" style="background: rgba(255, 255, 255, 0.05); 
+                                                backdrop-filter: blur(10px);
+                                                border: 1px solid rgba(255, 255, 255, 0.1);
+                                                border-radius: 20px;
+                                                padding: 30px;
+                                                height: 100%;
+                                                transition: all 0.3s ease;">
+                    <div class="benefit-icon mb-4" style="width: 60px; 
+                                                         height: 60px; 
+                                                         background: linear-gradient(135deg, #4a6cf7, #3a6de5);
+                                                         border-radius: 15px;
+                                                         display: flex;
+                                                         align-items: center;
+                                                         justify-content: center;">
+                        <i class="fas fa-bolt" style="font-size: 1.5rem; color: white;"></i>
+                    </div>
+                    <h3 class="text-white mb-3" style="font-weight: 700;">Começa sem demora</h3>
+                    <p class="text-light opacity-75 mb-4">
+                        Integração rápida com todos os documentos necessários
+                    </p>
+                    <div class="highlight-box" style="background: rgba(74, 108, 247, 0.1); 
+                                                    padding: 15px;
+                                                    border-radius: 10px;
+                                                    border-left: 4px solid #4a6cf7;">
+                        <h4 class="text-white mb-0" style="font-weight: 600;">
+                            <span style="color: #4a6cf7;">24 horas</span> para começar
+                        </h4>
+                        <small class="text-light opacity-75">Processo de cadastro acelerado</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefício 4 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="benefit-card" style="background: rgba(255, 255, 255, 0.05); 
+                                                backdrop-filter: blur(10px);
+                                                border: 1px solid rgba(255, 255, 255, 0.1);
+                                                border-radius: 20px;
+                                                padding: 30px;
+                                                height: 100%;
+                                                transition: all 0.3s ease;">
+                    <div class="benefit-icon mb-4" style="width: 60px; 
+                                                         height: 60px; 
+                                                         background: linear-gradient(135deg, #4a6cf7, #3a6de5);
+                                                         border-radius: 15px;
+                                                         display: flex;
+                                                         align-items: center;
+                                                         justify-content: center;">
+                        <i class="fas fa-money-bill-wave" style="font-size: 1.5rem; color: white;"></i>
+                    </div>
+                    <h3 class="text-white mb-3" style="font-weight: 700;">Recebe o teu dinheiro rapidamente</h3>
+                    <p class="text-light opacity-75 mb-4">
+                        Recebe os pagamentos em poucos dias - sem burocracia
+                    </p>
+                    <div class="highlight-box" style="background: rgba(74, 108, 247, 0.1); 
+                                                    padding: 15px;
+                                                    border-radius: 10px;
+                                                    border-left: 4px solid #4a6cf7;">
+                        <h4 class="text-white mb-0" style="font-weight: 600;">
+                            Saques <span style="color: #4a6cf7;">diários</span> disponíveis
+                        </h4>
+                        <small class="text-light opacity-75">Receba seu dinheiro quando precisar</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefício 5 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="benefit-card" style="background: rgba(255, 255, 255, 0.05); 
+                                                backdrop-filter: blur(10px);
+                                                border: 1px solid rgba(255, 255, 255, 0.1);
+                                                border-radius: 20px;
+                                                padding: 30px;
+                                                height: 100%;
+                                                transition: all 0.3s ease;">
+                    <div class="benefit-icon mb-4" style="width: 60px; 
+                                                         height: 60px; 
+                                                         background: linear-gradient(135deg, #4a6cf7, #3a6de5);
+                                                         border-radius: 15px;
+                                                         display: flex;
+                                                         align-items: center;
+                                                         justify-content: center;">
+                        <i class="fas fa-clock" style="font-size: 1.5rem; color: white;"></i>
+                    </div>
+                    <h3 class="text-white mb-3" style="font-weight: 700;">Horários flexíveis</h3>
+                    <p class="text-light opacity-75 mb-4">
+                        Conduz de acordo com o teu próprio horário, sem depender do típico horário das 9 às 5
+                    </p>
+                    <div class="highlight-box" style="background: rgba(74, 108, 247, 0.1); 
+                                                    padding: 15px;
+                                                    border-radius: 10px;
+                                                    border-left: 4px solid #4a6cf7;">
+                        <h4 class="text-white mb-0" style="font-weight: 600;">
+                            Trabalhe <span style="color: #4a6cf7;">quando quiser</span>
+                        </h4>
+                        <small class="text-light opacity-75">Ideal para estudantes ou segundo emprego</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefício 6 (CTA) -->
+            <div class="col-lg-4 col-md-6">
+                <div class="benefit-card cta-card" style="background: linear-gradient(135deg, #4a6cf7, #3a6de5); 
+                                                        border-radius: 20px;
+                                                        padding: 30px;
+                                                        height: 100%;
+                                                        display: flex;
+                                                        flex-direction: column;
+                                                        justify-content: center;
+                                                        text-align: center;">
+                    <div class="cta-icon mb-4" style="margin: 0 auto 20px; 
+                                                     width: 80px; 
+                                                     height: 80px; 
+                                                     background: rgba(255, 255, 255, 0.2);
+                                                     border-radius: 50%;
+                                                     display: flex;
+                                                     align-items: center;
+                                                     justify-content: center;">
+                        <i class="fas fa-user-plus" style="font-size: 2rem; color: white;"></i>
+                    </div>
+                    <h3 class="text-white mb-3" style="font-weight: 700;">Pronto para começar?</h3>
+                    <p class="text-white opacity-90 mb-4">
+                        Junte-se a milhares de motoqueiros que já transformaram suas vidas com a OX4
+                    </p>
+                    <a href="#" class="btn btn-light btn-lg px-4 py-3" 
+                       style="border-radius: 12px; 
+                              font-weight: 600;
+                              color: #4a6cf7;
+                              margin-top: auto;">
+                        <i class="fas fa-play me-2"></i> Começar agora
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rodapé da seção -->
+        <div class="row mt-60">
+            <div class="col-lg-8 mx-auto text-center">
+                <div class="stats-box" style="background: rgba(255, 255, 255, 0.05); 
+                                            border-radius: 15px;
+                                            padding: 25px;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h2 class="text-white mb-0" style="font-weight: 800; font-size: 2.5rem;">2.500+</h2>
+                            <p class="text-light opacity-75 mb-0">Motoqueiros ativos</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h2 class="text-white mb-0" style="font-weight: 800; font-size: 2.5rem;">4.8★</h2>
+                            <p class="text-light opacity-75 mb-0">Avaliação média</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h2 class="text-white mb-0" style="font-weight: 800; font-size: 2.5rem;">98%</h2>
+                            <p class="text-light opacity-75 mb-0">Taxa de satisfação</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Estilos de interação -->
+<style>
+    .benefit-card {
+        transition: all 0.3s ease;
+    }
+    
+    .benefit-card:hover {
+        transform: translateY(-10px);
+        border-color: rgba(74, 108, 247, 0.3) !important;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+    
+    .cta-card {
+        animation: pulseCTA 2s infinite;
+    }
+    
+    @keyframes pulseCTA {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.02); }
+    }
+    
+    @media (max-width: 768px) {
+        h1 { font-size: 2.2rem !important; }
+        .benefit-card { padding: 20px !important; }
+    }
+</style>
+
+<section class="si__how__to__start__area pt-100 pb-100" style="background: #002841;">
+    <div class="container custom__container">
+        <!-- Cabeçalho -->
+        <div class="row justify-content-center mb-50">
+            <div class="col-lg-8 text-center">
+                <div class="badge-animated mb-3" style="background: linear-gradient(90deg, #4a6cf7, #3a6de5);">
+                    <span class="badge-text">🚀 COMEÇAR É FÁCIL</span>
+                </div>
+                <h1 class="text-white mb-3" style="font-size: 2.8rem; font-weight: 800;">
+                    Como <span style="color: #4a6cf7;">começar</span> na OX4?
+                </h1>
+                <p class="text-light opacity-75" style="font-size: 1.1rem;">
+                    Em 4 passos simples, comece a ganhar dinheiro com nossas motos
+                </p>
+            </div>
+        </div>
+
+        <div class="row align-items-center">
+            <!-- Imagem à esquerda -->
+            <div class="col-lg-5">
+                <div class="phone-showcase" style="position: relative;">
+                    <!-- Telefone principal -->
+                    <div class="phone-mockup" style="position: relative; 
+                                                     max-width: 280px; 
+                                                     margin: 0 auto;">
+                        <div class="phone-frame" style="background: #003355; 
+                                                       border-radius: 30px; 
+                                                       padding: 12px; 
+                                                       box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+                            <div class="phone-screen" style="background: #001c33; 
+                                                            border-radius: 25px; 
+                                                            overflow: hidden; 
+                                                            height: 500px; 
+                                                            position: relative;">
+                                <!-- Tela da app -->
+                                <div class="app-screen" style="position: absolute; 
+                                                              top: 0; 
+                                                              left: 0; 
+                                                              width: 100%; 
+                                                              height: 100%;">
+                                    <!-- Header -->
+                                    <div style="background: #4a6cf7; 
+                                                padding: 20px 15px;">
+                                        <h6 class="mb-0 text-white text-center" style="font-weight: 700;">OX4 Driver</h6>
+                                    </div>
+                                    
+                                    <!-- Conteúdo -->
+                                    <div style="padding: 20px;">
+                                        <!-- Progresso -->
+                                        <div class="progress-bar mb-4" style="height: 6px; 
+                                                                             background: rgba(255,255,255,0.1); 
+                                                                             border-radius: 3px;">
+                                            <div style="width: 25%; 
+                                                       height: 100%; 
+                                                       background: #4a6cf7; 
+                                                       border-radius: 3px;"></div>
+                                        </div>
+                                        
+                                        <!-- Ícones dos passos -->
+                                        <div class="d-flex justify-content-between mb-4">
+                                            <div class="text-center">
+                                                <div style="width: 35px; 
+                                                           height: 35px; 
+                                                           background: #4a6cf7; 
+                                                           border-radius: 50%; 
+                                                           margin: 0 auto 5px; 
+                                                           display: flex; 
+                                                           align-items: center; 
+                                                           justify-content: center;">
+                                                    <i class="fas fa-download text-white" style="font-size: 0.9rem;"></i>
+                                                </div>
+                                                <small class="text-white" style="font-size: 0.7rem;">Baixar</small>
+                                            </div>
+                                            <div class="text-center">
+                                                <div style="width: 35px; 
+                                                           height: 35px; 
+                                                           background: rgba(255,255,255,0.1); 
+                                                           border-radius: 50%; 
+                                                           margin: 0 auto 5px; 
+                                                           display: flex; 
+                                                           align-items: center; 
+                                                           justify-content: center;">
+                                                    <i class="fas fa-edit text-light" style="font-size: 0.9rem;"></i>
+                                                </div>
+                                                <small class="text-light" style="font-size: 0.7rem;">Cadastrar</small>
+                                            </div>
+                                            <div class="text-center">
+                                                <div style="width: 35px; 
+                                                           height: 35px; 
+                                                           background: rgba(255,255,255,0.1); 
+                                                           border-radius: 50%; 
+                                                           margin: 0 auto 5px; 
+                                                           display: flex; 
+                                                           align-items: center; 
+                                                           justify-content: center;">
+                                                    <i class="fas fa-id-card text-light" style="font-size: 0.9rem;"></i>
+                                                </div>
+                                                <small class="text-light" style="font-size: 0.7rem;">Verificar</small>
+                                            </div>
+                                            <div class="text-center">
+                                                <div style="width: 35px; 
+                                                           height: 35px; 
+                                                           background: rgba(255,255,255,0.1); 
+                                                           border-radius: 50%; 
+                                                           margin: 0 auto 5px; 
+                                                           display: flex; 
+                                                           align-items: center; 
+                                                           justify-content: center;">
+                                                    <i class="fas fa-play text-light" style="font-size: 0.9rem;"></i>
+                                                </div>
+                                                <small class="text-light" style="font-size: 0.7rem;">Começar</small>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Card de ganhos -->
+                                        <div style="background: rgba(74, 108, 247, 0.15); 
+                                                    border-radius: 15px; 
+                                                    padding: 20px; 
+                                                    border: 1px solid rgba(74, 108, 247, 0.3);">
+                                            <div class="text-center mb-3">
+                                                <i class="fas fa-motorcycle text-white" style="font-size: 2rem;"></i>
+                                            </div>
+                                            <h5 class="text-white text-center mb-1" style="font-weight: 700;">Pronto para ganhar</h5>
+                                            <p class="text-light text-center mb-0" style="font-size: 0.8rem;">
+                                                Comece suas corridas hoje mesmo
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Badges flutuantes -->
+                    <div style="position: absolute; 
+                               top: 30px; 
+                               right: -20px; 
+                               background: #4a6cf7; 
+                               color: white; 
+                               padding: 10px 15px; 
+                               border-radius: 10px; 
+                               font-size: 0.8rem; 
+                               font-weight: 600;">
+                        <i class="fas fa-check me-1"></i>Passo 1
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Conteúdo à direita -->
+            <div class="col-lg-7">
+                <!-- Grid de 2x2 dos passos -->
+                <div class="row g-4">
+                    <!-- Passo 1 -->
+                    <div class="col-md-6">
+                        <div class="step-card" style="background: rgba(255, 255, 255, 0.05); 
+                                                     border-radius: 15px; 
+                                                     padding: 25px; 
+                                                     height: 100%; 
+                                                     border-left: 4px solid #4a6cf7;">
+                            <div class="step-header mb-3">
+                                <div style="display: flex; 
+                                           align-items: center; 
+                                           gap: 15px;">
+                                    <div style="width: 40px; 
+                                               height: 40px; 
+                                               background: #4a6cf7; 
+                                               border-radius: 10px; 
+                                               display: flex; 
+                                               align-items: center; 
+                                               justify-content: center;">
+                                        <i class="fas fa-download text-white"></i>
+                                    </div>
+                                    <h4 class="text-white mb-0" style="font-weight: 700;">Baixar a app</h4>
+                                </div>
+                            </div>
+                            <p class="text-light opacity-75 mb-0" style="font-size: 0.95rem; line-height: 1.5;">
+                                App simples de instalar. Basta iniciar sessão e seguir as instruções.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Passo 2 -->
+                    <div class="col-md-6">
+                        <div class="step-card" style="background: rgba(255, 255, 255, 0.05); 
+                                                     border-radius: 15px; 
+                                                     padding: 25px; 
+                                                     height: 100%; 
+                                                     border-left: 4px solid #4a6cf7;">
+                            <div class="step-header mb-3">
+                                <div style="display: flex; 
+                                           align-items: center; 
+                                           gap: 15px;">
+                                    <div style="width: 40px; 
+                                               height: 40px; 
+                                               background: #4a6cf7; 
+                                               border-radius: 10px; 
+                                               display: flex; 
+                                               align-items: center; 
+                                               justify-content: center;">
+                                        <i class="fas fa-edit text-white"></i>
+                                    </div>
+                                    <h4 class="text-white mb-0" style="font-weight: 700;">Preencher formulário</h4>
+                                </div>
+                            </div>
+                            <p class="text-light opacity-75 mb-0" style="font-size: 0.95rem; line-height: 1.5;">
+                                Cadastro rápido e intuitivo. Interface simplificada para poucos minutos.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Passo 3 -->
+                    <div class="col-md-6">
+                        <div class="step-card" style="background: rgba(255, 255, 255, 0.05); 
+                                                     border-radius: 15px; 
+                                                     padding: 25px; 
+                                                     height: 100%; 
+                                                     border-left: 4px solid #4a6cf7;">
+                            <div class="step-header mb-3">
+                                <div style="display: flex; 
+                                           align-items: center; 
+                                           gap: 15px;">
+                                    <div style="width: 40px; 
+                                               height: 40px; 
+                                               background: #4a6cf7; 
+                                               border-radius: 10px; 
+                                               display: flex; 
+                                               align-items: center; 
+                                               justify-content: center;">
+                                        <i class="fas fa-id-card text-white"></i>
+                                    </div>
+                                    <h4 class="text-white mb-0" style="font-weight: 700;">Verificação</h4>
+                                </div>
+                            </div>
+                            <p class="text-light opacity-75 mb-0" style="font-size: 0.95rem; line-height: 1.5;">
+                                Verificação fotográfica e documentos. Segurança em primeiro lugar.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Passo 4 -->
+                    <div class="col-md-6">
+                        <div class="step-card" style="background: rgba(255, 255, 255, 0.05); 
+                                                     border-radius: 15px; 
+                                                     padding: 25px; 
+                                                     height: 100%; 
+                                                     border-left: 4px solid #4a6cf7;">
+                            <div class="step-header mb-3">
+                                <div style="display: flex; 
+                                           align-items: center; 
+                                           gap: 15px;">
+                                    <div style="width: 40px; 
+                                               height: 40px; 
+                                               background: #4a6cf7; 
+                                               border-radius: 10px; 
+                                               display: flex; 
+                                               align-items: center; 
+                                               justify-content: center;">
+                                        <i class="fas fa-play text-white"></i>
+                                    </div>
+                                    <h4 class="text-white mb-0" style="font-weight: 700;">Começar a ganhar!</h4>
+                                </div>
+                            </div>
+                            <p class="text-light opacity-75 mb-0" style="font-size: 0.95rem; line-height: 1.5;">
+                                Em poucas horas, faça viagens e ganhe dinheiro. Foco no que interessa.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature Pro -->
+                <div class="mt-40">
+                    <div class="pro-feature" style="background: rgba(74, 108, 247, 0.1); 
+                                                   border-radius: 15px; 
+                                                   padding: 25px; 
+                                                   border: 1px solid rgba(74, 108, 247, 0.3);">
+                        <div class="d-flex align-items-start gap-3">
+                            <div style="flex-shrink: 0;">
+                                <div style="width: 50px; 
+                                           height: 50px; 
+                                           background: #4a6cf7; 
+                                           border-radius: 12px; 
+                                           display: flex; 
+                                           align-items: center; 
+                                           justify-content: center;">
+                                    <i class="fas fa-crown text-white" style="font-size: 1.2rem;"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-white mb-2" style="font-weight: 700;">OX4 Pro: conduz inteligente, ganha mais</h4>
+                                <p class="text-light opacity-75 mb-3" style="font-size: 0.95rem;">
+                                    Controle seus rendimentos com OX4 Pro. App destaca áreas movimentadas 
+                                    e apresenta viagens disponíveis. Navegação avançada e ganhos sem horários rígidos.
+                                </p>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <a href="#" class="btn btn-primary btn-sm px-3 py-2" 
+                                       style="border-radius: 8px; 
+                                              background: #4a6cf7; 
+                                              border: none; 
+                                              font-weight: 600;">
+                                        <i class="fas fa-rocket me-1"></i> Conhecer OX4 Pro
+                                    </a>
+                                    <a href="#" class="btn btn-outline-light btn-sm px-3 py-2" 
+                                       style="border-radius: 8px; 
+                                              border-color: rgba(255,255,255,0.3); 
+                                              color: white; 
+                                              font-weight: 600;">
+                                        <i class="fas fa-video me-1"></i> Ver Demo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- CTA -->
+                <div class="d-flex flex-wrap gap-3 mt-30">
+                    <a href="#" class="btn btn-primary btn-lg px-4 py-3" 
+                       style="border-radius: 10px; 
+                              background: #4a6cf7; 
+                              border: none; 
+                              font-weight: 600;">
+                        <i class="fas fa-download me-2"></i> Baixar App Agora
+                    </a>
+                    <a href="#" class="btn btn-outline-light btn-lg px-4 py-3" 
+                       style="border-radius: 10px; 
+                              border-color: rgba(255,255,255,0.3); 
+                              color: white; 
+                              font-weight: 600;">
+                        <i class="fas fa-question-circle me-2"></i> Dúvidas Frequentes
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Estilos -->
+<style>
+    .step-card {
+        transition: all 0.3s ease;
+    }
+    
+    .step-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.08) !important;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .phone-frame {
+        animation: subtleFloat 5s ease-in-out infinite;
+    }
+    
+    @keyframes subtleFloat {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+    
+    .pro-feature {
+        transition: all 0.3s ease;
+    }
+    
+    .pro-feature:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    @media (max-width: 991px) {
+        .phone-mockup {
+            max-width: 240px;
+            margin-bottom: 40px;
+        }
+        
+        .phone-screen {
+            height: 450px !important;
+        }
+        
+        h1 {
+            font-size: 2.2rem !important;
+        }
+        
+        .step-card {
+            padding: 20px !important;
+        }
+        
+        .pro-feature {
+            padding: 20px !important;
+        }
+    }
+</style>
+
+
+<section class="si__faq__are pb-120" style="background: #002841;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="si__section__title pb-40 text-center">
+                    <h5 style="color: #4a6cf7;"> 
+                        <i class="fa-regular fa-chevrons-left"></i> Perguntas Frequentes <i class="fa-regular fa-chevrons-right"></i> 
+                    </h5>
+                    <h1 class="text-anime-style-3 text-white">
+                        Soluções Estratégicas para <br>
+                        <span class="si__section__title__highlight">
+                            Usuários <svg width="206" height="8" viewBox="0 0 206 8" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M3.44926 5.97856C9.63291 6.63065 15.8166 7.12254 22.0002 7.45421C25.7441 7.65658 29.4796 7.81679 33.232 7.88425C38.6202 7.96857 44.0168 7.88426 49.4051 7.74934C54.0597 7.65658 58.7227 7.59756 63.3773 7.5301L74.5585 7.32773C78.8589 7.2434 83.1594 7.19281 87.4514 7.06632C97.334 6.77963 107.214 6.49855 117.091 6.2231C121.02 6.12191 124.95 6.07132 128.896 6.02916L137.455 5.9364C138.745 5.9364 140.035 5.9364 141.325 5.9364L150.769 6.07132C152.135 6.07132 153.51 6.07132 154.876 6.1725C159.421 6.39174 163.974 6.57725 168.519 6.85552C173.494 7.15908 178.472 7.38675 183.453 7.53853C187.787 7.67345 192.129 7.77463 196.464 7.7409C199.658 7.75806 202.851 7.58913 206.026 7.23497"
+                                    fill="#4a6cf7" />
+                            </svg>
+                        </span> OX4
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 wow fadeInUp animated" data-wow-delay="1s">
+                <div class="si__faq__accordion">
+                    <ul class="my-accordion">
+                        <li style="background: rgba(255, 255, 255, 0.05); 
+                                   border: 1px solid rgba(255, 255, 255, 0.1);
+                                   border-radius: 15px;
+                                   padding: 25px;
+                                   margin-bottom: 20px;">
+                            <div class="accordion__number">
+                                <span style="color: #4a6cf7; font-weight: 700;">01</span>
+                            </div>
+                            <div class="accordion__content">
+                                <h2 style="color: white; font-weight: 600;">Como faço para baixar o aplicativo OX4?</h2>
+                                <p style="color: rgba(255, 255, 255, 0.8);">
+                                    Você pode baixar o OX4 diretamente na App Store (iPhone) ou Google Play
+                                    (Android). O download é gratuito.
+                                </p>
+                            </div>
+                        </li>
+                        <li style="background: rgba(255, 255, 255, 0.05); 
+                                   border: 1px solid rgba(255, 255, 255, 0.1);
+                                   border-radius: 15px;
+                                   padding: 25px;
+                                   margin-bottom: 20px;">
+                            <div class="accordion__number">
+                                <span style="color: #4a6cf7; font-weight: 700;">02</span>
+                            </div>
+                            <div class="accordion__content">
+                                <h2 style="color: white; font-weight: 600;">Como me cadastrar?</h2>
+                                <p style="color: rgba(255, 255, 255, 0.8);">
+                                    Após instalar o app, abra e clique em "Cadastrar-se". Você pode criar sua conta
+                                    como passageiro ou motorista.
+                                </p>
+                            </div>
+                        </li>
+                        <li style="background: rgba(255, 255, 255, 0.05); 
+                                   border: 1px solid rgba(255, 255, 255, 0.1);
+                                   border-radius: 15px;
+                                   padding: 25px;
+                                   margin-bottom: 20px;">
+                            <div class="accordion__number">
+                                <span style="color: #4a6cf7; font-weight: 700;">03</span>
+                            </div>
+                            <div class="accordion__content">
+                                <h2 style="color: white; font-weight: 600;">Quais formas de pagamento são aceitas?</h2>
+                                <p style="color: rgba(255, 255, 255, 0.8);">
+                                    O app aceita cartões de crédito, débito, e pagamentos via carteiras digitais
+                                    integradas.
+                                </p>
+                            </div>
+                        </li>
+                        <li style="background: rgba(255, 255, 255, 0.05); 
+                                   border: 1px solid rgba(255, 255, 255, 0.1);
+                                   border-radius: 15px;
+                                   padding: 25px;
+                                   margin-bottom: 20px;">
+                            <div class="accordion__number">
+                                <span style="color: #4a6cf7; font-weight: 700;">04</span>
+                            </div>
+                            <div class="accordion__content">
+                                <h2 style="color: white; font-weight: 600;">Como posso reservar uma corrida?</h2>
+                                <p style="color: rgba(255, 255, 255, 0.8);">
+                                    Basta abrir o app, inserir seu destino, escolher seu veículo e confirmar a
+                                    corrida. O motorista mais próximo será notificado.
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="si__faq__thumb reveal-left"
+                    style="display: flex; justify-content: center; align-items: center; position: relative;">
+                    <img style="width: 300px; height: 300px; object-fit: cover; border-radius: 50%; border: 4px solid #4a6cf7;"
+                        src="{% static 'assets1/images/IMG-20251217-WA0010.jpg' %}" alt="FAQ OX4">
+                    <img class="si__faq__thumb__shape3 bounce-animate5"
+                        src="{% static 'assets1/images/faq/3.png' %}" alt="">
+                    <img class="si__faq__thumb__shape3 bounce-animate5"
+                        src="{% static 'assets1/images/faq/3.png' %}" alt="">
+                    <img class="si__faq__thumb__shape3 bounce-animate5"
+                        src="{% static 'assets1/images/faq/3.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Estilos para hover dos itens FAQ -->
+<style>
+    .my-accordion li {
+        transition: all 0.3s ease;
+    }
+    
+    .my-accordion li:hover {
+        background: rgba(74, 108, 247, 0.1) !important;
+        border-color: rgba(74, 108, 247, 0.3) !important;
+        transform: translateY(-5px);
+    }
+    
+    .si__faq__thumb img {
+        transition: transform 0.3s ease;
+    }
+    
+    .si__faq__thumb:hover img:first-child {
+        transform: scale(1.05);
+    }
+    
+    /* Responsividade */
+    @media (max-width: 768px) {
+        .si__faq__thumb img:first-child {
+            width: 250px !important;
+            height: 250px !important;
+        }
+    }
+</style>
+
+
+<section class="si__fotter__area bg" style="background: url('{% static 'assets1/images/fotter/Fotter.jpg' %}');">
+        <div class="container">
+            <div class="row">
+                <!-- Logo e descrição -->
+                <div class="col-lg-3 col-md-6 col-sm-6 wow fadeInUp animated" data-wow-delay=".3s">
+                    <div class="si__fotter__box">
+                        <div class="si__fotter__box__icon">
+                            <a href="index.html">
+                                <img style="width: 200px;"
+                                    src="{% static 'assets1/images/Colorful Modern Infinity Creative Studio Logo.png' %}"
+                                    alt="">
+                            </a>
+                            <p>Transporte confiável e seguro para suas viagens com OX4.</p>
+                        </div>
+                        <div class="si__fotter__box__social">
+                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Links úteis -->
+                <div class="col-lg-3 col-md-6 col-sm-6 wow fadeInUp animated" data-wow-delay=".6s">
+                    <div class="si__fotter__text">
+                        <h6>Sobre a Empresa</h6>
+                        <ul>
+                            <li><a href="#">Serviços</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Depoimentos</a></li>
+                            <li><a href="#">Sobre Nós</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Contato -->
+                <div class="col-lg-3 col-md-6 col-sm-6 wow fadeInUp animated" data-wow-delay=".9s">
+                    <div class="si__fotter__link">
+                        <h6>Nosso Escritório</h6>
+                        <a href="mailto:info-ox4@adsgroup-nsd.com"><i class="fa-light fa-envelope"></i>
+                            info-ox4@adsgroup-nsd.com</a>
+                        <a href="tel:+923908353"><i class="fa-solid fa-phone"></i> 923 908 353</a>
+                        <a href="#"><i class="fa-regular fa-location-dot"></i> Localização Talatona</a>
+                    </div>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="col-lg-3 col-md-6 col-sm-6 wow fadeInUp animated" data-wow-delay="1.2s">
+                    <div class="si__fotter__content">
+                        <h6>Fique Conectado</h6>
+                        <p>Receba novidades sobre a OX4 e nossas promoções.</p>
+                        <div class="si__fotter__mailchimp__form">
+                            <form action="https://formspree.io/f/maygbqwa" method="post">
+                                <input name="email" type="email" placeholder="Seu Email...">
+                                <button style="background-color: #2e3f6e;" type="submit"> <i
+                                        class="fa-sharp fa-light fa-paper-plane"></i> </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="si__fotter__copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="si__fotter__copyright__content">
+                            <p>© OX4 2025 | Todos os direitos reservados</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="si__fotter__copyright__text text-end">
+                            <ul>
+                                <li><a href="about-us.html">Termos & Condições</a></li>
+                                <li><a href="about-us.html">Política de Privacidade</a></li>
+                                <li><a href="about-us.html">Contato</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="scroll-percentage"><span id="scroll-percentage-value"></span></div>
+
+    <!-- Scrollup -->
+
+    <!--==================================================-->
+    <!-- Start Search Popup Area -->
+    <!--==================================================-->
+    <div class="search-popup">
+        <button class="close-search style-two"><i class="fa-sharp fa-light fa-xmark"></i></button>
+        <button class="close-search"><i class="fa-sharp fa-regular fa-up"></i></button>
+        <form method="post" action="index.html#">
+            <div class="form-group">
+                <input type="search" name="search-field" value="" placeholder="Search Here" required="">
+                <button type="submit"><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </form>
+    </div>
+    
+
+    <!-- JS Here -->
+    {% include 'include/java.html' %}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const sliderTrack = document.getElementById('sliderTrack');
+            const slides = document.querySelectorAll('.motoqueiro-slide');
+            const dots = document.querySelectorAll('.slider-dot');
+            const progressBar = document.getElementById('progressBar');
+
+            let currentSlide = 0;
+            let slideInterval;
+            const totalSlides = slides.length;
+            const slideDuration = 6000; // 6 segundos
+
+            // Função para mover para um slide específico
+            function goToSlide(slideIndex) {
+                // Remove classe active de todos os slides e dots
+                slides.forEach(slide => slide.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+
+                // Atualiza slide atual
+                currentSlide = slideIndex;
+
+                // Adiciona classe active ao slide e dot atual
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
+
+                // Move o track
+                const translateX = -currentSlide * (100 / totalSlides);
+                sliderTrack.style.transform = `translateX(${translateX}%)`;
+
+                // Reinicia a barra de progresso
+                progressBar.classList.remove('running');
+                void progressBar.offsetWidth; // Trigger reflow
+                progressBar.classList.add('running');
+            }
+
+            // Função para próximo slide
+            function nextSlide() {
+                let nextSlideIndex = currentSlide + 1;
+                if (nextSlideIndex >= totalSlides) {
+                    nextSlideIndex = 0;
+                }
+                goToSlide(nextSlideIndex);
+            }
+
+            // Event listeners para os dots
+            dots.forEach(dot => {
+                dot.addEventListener('click', function () {
+                    const slideIndex = parseInt(this.getAttribute('data-slide'));
+                    goToSlide(slideIndex);
+                    resetInterval();
+                });
+            });
+
+            // Reinicia o intervalo
+            function resetInterval() {
+                clearInterval(slideInterval);
+                startSlider();
+            }
+
+            // Inicia o slider automático
+            function startSlider() {
+                // Inicia a barra de progresso
+                progressBar.style.width = '0%';
+                void progressBar.offsetWidth;
+                progressBar.classList.add('running');
+
+                // Inicia o intervalo
+                slideInterval = setInterval(nextSlide, slideDuration);
+            }
+
+            // Pausa o slider ao passar o mouse
+            sliderTrack.addEventListener('mouseenter', function () {
+                clearInterval(slideInterval);
+                progressBar.classList.remove('running');
+            });
+
+            // Retoma o slider ao retirar o mouse
+            sliderTrack.addEventListener('mouseleave', function () {
+                startSlider();
+            });
+
+            // Inicia o slider
+            startSlider();
+
+            // Adiciona animação CSS para a barra de progresso
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes progress {
+                    0% { width: 0%; }
+                    100% { width: 100%; }
+                }
+                .progress-bar.running {
+                    animation: progress ${slideDuration / 1000}s linear forwards;
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+
+</body>
+
+</html>
