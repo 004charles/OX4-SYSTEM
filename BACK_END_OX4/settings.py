@@ -1,7 +1,6 @@
-
 from pathlib import Path
 from datetime import timedelta
-from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -11,12 +10,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-$ps8%iey26^lrv2ly5o^iqxr_!2z((%%00mwt%0+w!*onof7oy'
+# Read SECRET_KEY from environment in production. A default (insecure) value is provided for local development only.
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-replace-me')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ["*"]
+# Allowed hosts can be set via environment variable (comma-separated). Defaults to '*' for development.
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '*').split(',') if os.environ.get('DJANGO_ALLOWED_HOSTS') else (['*'] if DEBUG else [])
+
+# If running in production (DEBUG=False) ensure SECRET_KEY is provided
+if not DEBUG and SECRET_KEY == 'django-insecure-replace-me':
+    raise Exception('DJANGO_SECRET_KEY environment variable must be set when DEBUG=False')
 
 
 # Application definition
@@ -85,6 +90,7 @@ REST_FRAMEWORK = {
 
 
 
+
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
@@ -130,23 +136,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-import os
-from pathlib import Path
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = '/static/'
-#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),  
 ]
 
 # Pasta final onde collectstatic vai copiar tudo
 STATIC_ROOT = BASE_DIR / "staticfiles"
-
 
 
 SIMPLE_JWT = {
