@@ -14,3 +14,6 @@ def passageiro(request):
 
 def motoqueiro(request):
     return render(request, 'motoqueiro.html')
+
+def sobresite(request):
+    return render(request, 'sobresite.html')

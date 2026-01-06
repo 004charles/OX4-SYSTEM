@@ -1,0 +1,581 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html class="no-js" lang="zxx">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title> Bizso - Business Consulting HTML5 Template </title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	{% include 'include/css.html' %}
+</head>
+<body>
+
+<!-- pre loader area start -->
+<div id="loading">
+		<div id="loading-center">
+			<div id="loading-center-absolute">
+				<!-- loading content here -->
+				<div class="preloader__content text-center">
+					<div class="preloader__logo">
+						<img style="width: 200px;" src="{% static 'assets1/images/Logotipo 1.png' %}" alt="">
+					</div>
+					<div style="background-color: #2e3f6e; color: #2e3f6e;" id="st-loading-bar" class="preloader__bar">
+						<div id="st-loading-line" class="preloader__bar-inner"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- pre loader area end -->
+
+<!-- SI Header Area -->
+{% include 'include/menusite.html' %}
+<!-- SI Breadcumb Area -->
+<section class="si__breadcumb__area bg" style="background: url(assets/images/breadcumb/Hero.p);">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="si__breadcumb__text text-center">
+					<h1>Sobre Nós</h1>
+					<span>
+						<a href="index.html">Início</a>
+						<i class="fa-regular fa-chevron-right"></i>
+						Sobre Nós
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+}
+<!-- SI Why Choose Us -->
+<section class="si__why__choose__area pt-120 pb-120">
+	<div class="container custom__container__two">
+		<div class="row align-items-center">
+			<div class="col-lg-6">
+				<div class="si__why__choose__thumb reveal-left">
+					<img src="{% static 'assets1/images/IMG_4870-removebg-preview.png' %}" alt="">
+					<div class="si__why__choose__counter">
+						<div class="si__why__choose__counter__inner">
+							<div class="si__why__choose__counter__icon">
+								<svg width="57" height="57" viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M12.7227 38.2073H44.2782C45.1451 38.2065 45.9763 37.8619 46.5894 37.249C47.2025 36.6361 47.5474 35.805 47.5485 34.938V30.8573C47.55 28.9878 46.9624 27.1654 45.8692 25.6489C44.7761 24.1324 43.2329 22.9989 41.4588 22.4093L33.3054 19.6915C42.8218 14.6469 39.4245 0.198594 28.5005 0.0625C17.6008 0.161016 14.1801 14.6905 23.6955 19.6915L15.5421 22.4093C13.7681 22.9989 12.2249 24.1324 11.1317 25.6489C10.0385 27.1654 9.45093 28.9878 9.45241 30.8573V34.938C9.45322 35.8051 9.79803 36.6365 10.4112 37.2496C11.0243 37.8627 11.8556 38.2065 12.7227 38.2073ZM20.1246 10.4696C20.1273 8.24902 21.0106 6.12015 22.5808 4.54995C24.151 2.97975 26.2799 2.09644 28.5005 2.09375C39.5972 2.51422 39.5931 18.426 28.5005 18.8455C26.2799 18.8428 24.151 17.9595 22.5808 16.3893C21.0106 14.8191 20.1273 12.6902 20.1246 10.4696ZM11.4837 30.8562C11.4827 29.4132 11.9364 28.0066 12.7803 26.8361C13.6243 25.6656 14.8156 24.7908 16.185 24.3359C18.8601 23.5864 25.7441 20.6858 28.5005 20.8798C31.2193 20.6766 38.1865 23.6016 40.8159 24.3349C42.1854 24.7898 43.3767 25.6646 44.2206 26.8351C45.0646 28.0056 45.5183 29.4122 45.5173 30.8552V34.937C45.5173 35.2657 45.3867 35.5808 45.1543 35.8132C44.922 36.0456 44.6068 36.1761 44.2782 36.1761H12.7227C12.3941 36.1761 12.0789 36.0456 11.8466 35.8132C11.6142 35.5808 11.4837 35.2657 11.4837 34.937V30.8562ZM34.513 45.2345H31.8012C31.7424 45.2343 31.685 45.2156 31.6374 45.181C31.5898 45.1463 31.5544 45.0975 31.5362 45.0415L30.6983 42.4638C30.542 42.005 30.2461 41.6065 29.8519 41.3243C29.4578 41.0422 28.9852 40.8904 28.5005 40.8904C28.0157 40.8904 27.5431 41.0422 27.149 41.3243C26.7548 41.6065 26.4589 42.005 26.3026 42.4638L25.4648 45.0415C25.4465 45.0976 25.4109 45.1466 25.3631 45.1813C25.3153 45.2159 25.2577 45.2346 25.1987 45.2345H22.4869C21.9987 45.2343 21.523 45.3888 21.128 45.6757C20.733 45.9627 20.4391 46.3674 20.2884 46.8318C20.1377 47.2962 20.1379 47.7964 20.2892 48.2606C20.4404 48.7249 20.7348 49.1292 21.1301 49.4158L23.3228 51.0083C23.3709 51.043 23.4066 51.0922 23.4249 51.1486C23.4431 51.205 23.4429 51.2658 23.4244 51.3221L22.5865 53.8998C22.436 54.3639 22.4362 54.8638 22.5871 55.3278C22.738 55.7919 23.0319 56.1962 23.4267 56.483C23.8215 56.7698 24.2969 56.9243 24.7849 56.9244C25.2728 56.9245 25.7483 56.7702 26.1432 56.4835L28.3359 54.89C28.3838 54.8553 28.4414 54.8366 28.5005 54.8366C28.5596 54.8366 28.6171 54.8553 28.665 54.89L30.8577 56.4835C31.2539 56.7628 31.7274 56.911 32.2121 56.9075C32.6967 56.9041 33.1681 56.749 33.5602 56.4641C33.9523 56.1792 34.2454 55.7787 34.3984 55.3189C34.5514 54.859 34.5567 54.3628 34.4134 53.8998L33.5766 51.3201C33.5583 51.264 33.5583 51.2037 33.5765 51.1476C33.5948 51.0916 33.6304 51.0428 33.6781 51.0083L35.8709 49.4158C36.2593 49.1255 36.5471 48.7209 36.6939 48.2587C36.8407 47.7966 36.8391 47.3 36.6893 46.8388C36.5395 46.3776 36.2491 45.9749 35.8588 45.6872C35.4684 45.3994 34.9978 45.2411 34.513 45.2345ZM34.6765 47.7725L32.4837 49.365C32.0884 49.6514 31.7941 50.0559 31.6433 50.5202C31.4926 50.9845 31.4931 51.4847 31.6448 51.9487L32.4817 54.5274C32.5001 54.5835 32.5002 54.644 32.482 54.7002C32.4639 54.7563 32.4284 54.8053 32.3807 54.8401C32.3329 54.8748 32.2754 54.8935 32.2164 54.8936C32.1574 54.8936 32.0999 54.8749 32.0521 54.8402C28.5035 52.1204 28.4801 52.1407 24.9488 54.8402C24.901 54.8751 24.8433 54.8939 24.7841 54.8939C24.7249 54.8939 24.6673 54.875 24.6195 54.8401C24.5717 54.8052 24.5362 54.756 24.5182 54.6996C24.5002 54.6432 24.5005 54.5826 24.5192 54.5264L25.3561 51.9487C25.5078 51.4847 25.5084 50.9845 25.3576 50.5202C25.2068 50.0559 24.9126 49.6514 24.5172 49.365L22.3234 47.7725C22.275 47.738 22.2389 47.689 22.2202 47.6326C22.2016 47.5762 22.2014 47.5153 22.2198 47.4587C22.2381 47.4022 22.274 47.353 22.3223 47.3183C22.3705 47.2836 22.4285 47.2652 22.488 47.2657H25.1997C25.6877 47.2663 26.1633 47.1121 26.5581 46.8252C26.9529 46.5383 27.2464 46.1335 27.3965 45.6691L28.2344 43.0915C28.2524 43.035 28.2878 42.9858 28.3357 42.9508C28.3835 42.9159 28.4412 42.897 28.5005 42.897C28.5597 42.897 28.6174 42.9159 28.6652 42.9508C28.7131 42.9858 28.7486 43.035 28.7666 43.0915L29.6044 45.6691C29.7546 46.1337 30.0483 46.5386 30.4432 46.8255C30.8382 47.1124 31.3141 47.2666 31.8023 47.2657H34.514C34.5732 47.2656 34.631 47.2843 34.6789 47.3192C34.7268 47.3541 34.7623 47.4033 34.7804 47.4597C34.7985 47.5161 34.7982 47.5769 34.7795 47.6331C34.7608 47.6893 34.7247 47.7381 34.6765 47.7725ZM15.0191 45.2345H12.3073C12.2484 45.2343 12.1911 45.2156 12.1435 45.181C12.0959 45.1463 12.0605 45.0975 12.0423 45.0415L11.2044 42.4638C11.0481 42.005 10.7522 41.6065 10.358 41.3243C9.96388 41.0422 9.49129 40.8904 9.00655 40.8904C8.52181 40.8904 8.04923 41.0422 7.65508 41.3243C7.26093 41.6065 6.96498 42.005 6.80874 42.4638L5.97085 45.0415C5.95265 45.0975 5.91721 45.1463 5.86961 45.181C5.822 45.2156 5.76466 45.2343 5.70577 45.2345H2.99405C2.50574 45.2341 2.02985 45.3884 1.63469 45.6753C1.23954 45.9622 0.945446 46.3669 0.794618 46.8313C0.64379 47.2958 0.643987 47.7961 0.795179 48.2604C0.946372 48.7247 1.24079 49.1292 1.63616 49.4158L3.82991 51.0083C3.87779 51.0432 3.91333 51.0924 3.9314 51.1488C3.94948 51.2052 3.94915 51.2659 3.93046 51.3221L3.09359 53.8998C2.94334 54.3638 2.9437 54.8634 3.09464 55.3272C3.24557 55.791 3.53933 56.1952 3.9339 56.4819C4.32846 56.7686 4.80359 56.9231 5.29132 56.9234C5.77905 56.9237 6.25438 56.7697 6.64929 56.4835L8.84202 54.89C8.88987 54.8553 8.94746 54.8366 9.00655 54.8366C9.06565 54.8366 9.12324 54.8553 9.17109 54.89L11.3648 56.4835C11.761 56.7624 12.2344 56.9103 12.7188 56.9066C13.2033 56.903 13.6744 56.7478 14.0663 56.463C14.4581 56.1782 14.7511 55.7779 14.9041 55.3183C15.0571 54.8586 15.0625 54.3626 14.9195 53.8998L14.0837 51.3201C14.0654 51.264 14.0654 51.2037 14.0836 51.1476C14.1019 51.0916 14.1375 51.0428 14.1852 51.0083L16.3769 49.4158C16.7654 49.1255 17.0532 48.7209 17.2 48.2587C17.3468 47.7966 17.3452 47.3 17.1954 46.8388C17.0456 46.3776 16.7552 45.9749 16.3649 45.6872C15.9745 45.3994 15.5039 45.2411 15.0191 45.2345ZM15.1826 47.7725L12.9898 49.365C12.5945 49.6514 12.3002 50.0559 12.1494 50.5202C11.9987 50.9845 11.9992 51.4847 12.1509 51.9487L12.9888 54.5274C13.0075 54.5837 13.0077 54.6444 12.9896 54.7008C12.9714 54.7572 12.9358 54.8064 12.8878 54.8412C12.8399 54.876 12.7821 54.8947 12.7229 54.8945C12.6636 54.8944 12.6059 54.8754 12.5582 54.8402C9.0096 52.1204 8.98624 52.1407 5.45491 54.8402C5.40709 54.8751 5.34942 54.8939 5.29022 54.8939C5.23102 54.8939 5.17336 54.875 5.12556 54.8401C5.07776 54.8052 5.04229 54.756 5.02427 54.6996C5.00625 54.6432 5.00661 54.5826 5.0253 54.5264L5.86218 51.9487C6.01392 51.4847 6.01445 50.9845 5.86369 50.5202C5.71292 50.0559 5.41865 49.6514 5.02327 49.365L2.82952 47.7725C2.78112 47.738 2.74496 47.689 2.72633 47.6326C2.70769 47.5762 2.70753 47.5153 2.72588 47.4587C2.74423 47.4022 2.78013 47.353 2.82836 47.3183C2.87659 47.2836 2.93463 47.2652 2.99405 47.2657H5.70577C6.19379 47.2663 6.66942 47.1121 7.06419 46.8252C7.45896 46.5383 7.75251 46.1335 7.90257 45.6691L8.74046 43.0915C8.75846 43.035 8.79394 42.9858 8.84177 42.9508C8.8896 42.9159 8.94731 42.897 9.00655 42.897C9.0658 42.897 9.1235 42.9159 9.17134 42.9508C9.21917 42.9858 9.25465 43.035 9.27265 43.0915L10.1105 45.6691C10.2607 46.1337 10.5544 46.5386 10.9493 46.8255C11.3443 47.1124 11.8202 47.2666 12.3083 47.2657H15.0201C15.0793 47.2656 15.1371 47.2843 15.185 47.3192C15.2329 47.3541 15.2684 47.4033 15.2865 47.4597C15.3046 47.5161 15.3043 47.5769 15.2856 47.6331C15.2669 47.6893 15.2308 47.7381 15.1826 47.7725ZM56.2047 46.832C56.0587 46.3649 55.766 45.9573 55.3702 45.6695C54.9743 45.3817 54.4962 45.2292 54.0069 45.2345H51.2952C51.2363 45.2343 51.1789 45.2156 51.1313 45.181C51.0837 45.1463 51.0483 45.0975 51.0301 45.0415L50.1922 42.4638C50.0359 42.005 49.74 41.6065 49.3458 41.3243C48.9517 41.0422 48.4791 40.8904 47.9944 40.8904C47.5096 40.8904 47.037 41.0422 46.6429 41.3243C46.2487 41.6065 45.9528 42.005 45.7966 42.4638L44.9587 45.0415C44.9404 45.0976 44.9048 45.1466 44.857 45.1813C44.8092 45.2159 44.7516 45.2346 44.6926 45.2345H41.9809C41.4926 45.2343 41.0169 45.3888 40.6219 45.6757C40.2269 45.9627 39.933 46.3674 39.7823 46.8318C39.6316 47.2962 39.6319 47.7964 39.7831 48.2606C39.9343 48.7249 40.2287 49.1292 40.624 49.4158L42.8167 51.0083C42.8648 51.043 42.9005 51.0922 42.9188 51.1486C42.937 51.205 42.9369 51.2658 42.9183 51.3221L42.0804 53.8998C41.9299 54.3639 41.9301 54.8638 42.081 55.3278C42.2319 55.7919 42.5259 56.1962 42.9206 56.483C43.3154 56.7698 43.7908 56.9243 44.2788 56.9244C44.7667 56.9245 45.2422 56.7702 45.6371 56.4835L47.8298 54.89C47.8777 54.8553 47.9353 54.8366 47.9944 54.8366C48.0535 54.8366 48.111 54.8553 48.1589 54.89L50.3516 56.4835C50.7478 56.7628 51.2213 56.911 51.706 56.9075C52.1906 56.9041 52.662 56.749 53.0541 56.4641C53.4462 56.1792 53.7393 55.7787 53.8923 55.3189C54.0453 54.859 54.0506 54.3628 53.9073 53.8998L53.0705 51.3201C53.0522 51.264 53.0522 51.2037 53.0704 51.1476C53.0887 51.0916 53.1243 51.0428 53.172 51.0083L55.3648 49.4158C55.764 49.1325 56.0613 48.728 56.2126 48.2625C56.3639 47.7969 56.3611 47.2959 56.2047 46.832ZM54.1704 47.7725L51.9776 49.365C51.5823 49.6514 51.288 50.0559 51.1372 50.5202C50.9865 50.9845 50.987 51.4847 51.1387 51.9487L51.9756 54.5274C51.994 54.5835 51.9941 54.644 51.9759 54.7002C51.9578 54.7563 51.9223 54.8053 51.8746 54.8401C51.8269 54.8748 51.7693 54.8935 51.7103 54.8936C51.6513 54.8936 51.5938 54.8749 51.546 54.8402C47.9974 52.1204 47.9741 52.1407 44.4427 54.8402C44.3949 54.8755 44.3371 54.8947 44.2777 54.8949C44.2183 54.8951 44.1603 54.8763 44.1123 54.8413C44.0643 54.8063 44.0286 54.7569 44.0106 54.7003C43.9926 54.6436 43.9931 54.5827 44.0121 54.5264L44.85 51.9487C45.0017 51.4847 45.0023 50.9845 44.8515 50.5202C44.7007 50.0559 44.4065 49.6514 44.0111 49.365L41.8173 47.7725C41.7689 47.738 41.7328 47.689 41.7141 47.6326C41.6955 47.5762 41.6953 47.5153 41.7137 47.4587C41.732 47.4022 41.7679 47.353 41.8162 47.3183C41.8644 47.2836 41.9224 47.2652 41.9819 47.2657H44.6936C45.1816 47.2663 45.6572 47.1121 46.052 46.8252C46.4468 46.5383 46.7403 46.1335 46.8904 45.6691L47.7283 43.0915C47.7463 43.035 47.7818 42.9858 47.8296 42.9508C47.8774 42.9159 47.9351 42.897 47.9944 42.897C48.0536 42.897 48.1113 42.9159 48.1591 42.9508C48.207 42.9858 48.2425 43.035 48.2605 43.0915L49.0984 45.6691C49.2484 46.1335 49.542 46.5383 49.9367 46.8252C50.3315 47.1121 50.8071 47.2663 51.2952 47.2657H54.0069C54.0662 47.2654 54.1241 47.284 54.1722 47.3188C54.2202 47.3536 54.256 47.4028 54.2742 47.4592C54.2924 47.5157 54.2922 47.5765 54.2735 47.6328C54.2548 47.6892 54.2187 47.7381 54.1704 47.7725Z" fill="#DF2E2E"/>
+								</svg>
+							</div>
+							<div class="si__why__choose__counter__text">
+								<h1 class="counter"> 4 </h1>
+								<h3> K+ </h3>
+<span> Clientes Satisfeitos </span>
+							</div>	
+						</div>						
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="si__why__choose__right">
+					<div class="si__section__title">
+					<h5> Por que escolher a OX4 <i class="fa-regular fa-chevrons-right"></i> </h5>
+						<h1 class="text-anime-style-3">
+	Conectando Pessoas <br>
+	e Facilitando <span class="si__section__title__highlight">Viagens Urbanas</span>
+</h1>
+
+						<svg width="206" height="8" viewBox="0 0 206 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M3.44877 5.97856C9.63242 6.63065 15.8161 7.12254 21.9997 7.45421C25.7437 7.65658 29.4791 7.81679 33.2315 7.88425C38.6197 7.96857 44.0163 7.88426 49.4046 7.74934C54.0592 7.65658 58.7222 7.59756 63.3768 7.5301L74.558 7.32773C78.8584 7.2434 83.1589 7.19281 87.4509 7.06632C97.3335 6.77963 107.213 6.49855 117.09 6.2231C121.02 6.12191 124.949 6.07132 128.895 6.02916L137.454 5.9364C138.744 5.9364 140.034 5.9364 141.325 5.9364L150.769 6.07132C152.135 6.07132 153.509 6.07132 154.875 6.1725C159.42 6.39174 163.974 6.57725 168.519 6.85552C173.494 7.15908 178.471 7.38675 183.452 7.53853C187.786 7.67345 192.129 7.77463 196.463 7.7409C199.658 7.75806 202.85 7.58913 206.025 7.23497C203.934 6.93141 201.851 6.58568 199.752 6.30742H199.937C195.333 5.65813 190.704 5.13533 186.083 4.67999C182.485 4.32584 178.885 4.00541 175.281 3.71872L179.295 3.53321L184.995 3.23808C187.415 3.12846 189.835 2.96824 192.264 2.84176C196.657 2.62252 201.042 2.31896 205.41 1.88892C200.983 1.45044 196.514 1.39985 192.061 1.31552C187.311 1.29866 182.572 1.29023 177.845 1.29023C173.347 1.29023 168.85 1.36893 164.353 1.52633C160.331 1.63595 156.309 1.754 152.278 1.82989L142.514 2.02384C140.928 2.02384 139.335 2.10816 137.749 2.11659L121.728 2.18405C120.379 2.18405 119.03 2.18405 117.689 2.18405L110.682 2.13345L101.28 2.0407C100.141 2.0407 99.0031 2.0407 97.8647 1.99011L81.093 1.58536C76.6492 1.47574 72.2138 1.28179 67.7784 1.13001C59.4474 0.834885 51.1247 0.514459 42.7937 0.286788C38.392 0.160305 33.9904 0.0591196 29.5803 0.0253906H26.2074C24.2005 0.0253906 22.188 0.0253906 20.1699 0.0253906C18.6353 0.0253906 17.0922 0.101278 15.5491 0.101278C10.3801 0.101278 5.20266 0.227762 0.0336914 0.253059C1.39128 0.472297 2.74887 0.691541 4.1149 0.87705L8.27202 1.39985C10.8354 1.72027 13.3988 2.01822 15.9622 2.29367C16.4344 2.34426 16.9151 2.36956 17.3957 2.41172C18.7617 2.52415 20.1278 2.62534 21.4938 2.71528C24.5041 2.93452 27.5144 3.11159 30.5332 3.26337C32.2196 3.35613 33.9061 3.40672 35.5925 3.45732C27.2699 3.75245 18.9557 4.35114 10.6752 5.19436C8.26359 5.45576 5.85196 5.7003 3.44877 5.97856Z" fill="#DF2E2E"/>
+						</svg>
+						</span> </h1>
+<p>
+	Oferecemos uma solução moderna de transporte urbano, focada em
+	rapidez, segurança e conforto para o seu dia a dia.
+</p>
+					</div>
+					<div class="si__why__choose__iconbox pt-20 wow fadeInLeft animated" data-wow-delay="1s">
+						<h6><i class="fa-solid fa-angle-right"></i> Transporte Rápido e Seguro</h6>
+<p>
+	Moto-táxi eficiente para deslocações urbanas,
+	com motoristas treinados e rotas otimizadas.
+</p>
+
+					</div>
+					<div class="si__why__choose__iconbox pt-7 wow fadeInLeft animated" data-wow-delay="1.5s">
+						<h6><i class="fa-solid fa-angle-right"></i> App Simples e Confiável</h6>
+<p>
+	Peça sua viagem em poucos cliques, acompanhe o trajeto
+	e chegue ao destino com tranquilidade.
+</p>
+
+<a class="si__btn mt-15" href="about-us.html"> Baixa app </a>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- SI Text Line -->
+<section class="marquee-section mb-120">
+	<div class="marquee">
+		<div class="marquee-group">
+			<div class="text" data-text="Viagens Seguras">
+				<img src="{% static 'assets1/images/text-animation/1.png' %}" alt="">
+				Viagens Seguras
+			</div>
+
+			<div class="text weight" data-text="Mobilidade Urbana">
+				<img src="{% static 'assets1/images/text-animation/2.png' %}" alt="">
+				Mobilidade Urbana Inteligente
+			</div>
+
+			<div class="text" data-text="App de Transporte">
+				<img src="{% static 'assets1/images/text-animation/1.png' %}" alt="">
+				App de Transporte Rápido
+			</div>
+		</div>
+
+		<div class="marquee-group">
+			<div class="text" data-text="Motoristas Verificados">
+				<img src="{% static 'assets1/images/text-animation/1.png' %}" alt="">
+				Motoristas Verificados
+			</div>
+
+			<div class="text weight" data-text="Conforto e Agilidade">
+				<img src="{% static 'assets1/images/text-animation/2.png' %}" alt="">
+				Conforto e Agilidade
+			</div>
+
+			<div class="text" data-text="OX4 Transportes">
+				<img src="{% static 'assets1/images/text-animation/1.png' %}" alt="">
+				OX4 Transportes
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<!-- SI Work Process -->
+<section class="si__work__process__area pb-90">
+		<div class="container">
+
+			<!-- Título da seção -->
+			<div class="row align-items-center">
+				<div class="col-lg-6">
+					<div class="si__section__title text-right">
+						<h5 style="color: #2e3f6e;">Como Baixar o App <i class="fa-regular fa-chevrons-right"></i></h5>
+						<h1 class="text-anime-style-3">
+							Comece a Viajar <br>
+							<span class="si__section__title__highlight">
+								Rápido e Seguro <svg width="206" height="8" viewBox="0 0 206 8" fill="none"
+									xmlns="http://www.w3.org/2000/svg">
+									<path
+										d="M3.44926 5.97856C9.63291 6.63065 15.8166 7.12254 22.0002 7.45421C25.7441 7.65658 29.4796 7.81679 33.232 7.88425C38.6202 7.96857 44.0168 7.88426 49.4051 7.74934C54.0597 7.65658 58.7227 7.59756 63.3773 7.5301L74.5585 7.32773C78.8589 7.2434 83.1594 7.19281 87.4514 7.06632C97.334 6.77963 107.214 6.49855 117.091 6.2231C121.02 6.12191 124.95 6.07132 128.896 6.02916L137.455 5.9364C138.745 5.9364 140.035 5.9364 141.325 5.9364L150.769 6.07132C152.135 6.07132 153.51 6.07132 154.876 6.1725C159.421 6.39174 163.974 6.57725 168.519 6.85552C173.494 7.15908 178.472 7.38675 183.453 7.53853C187.787 7.67345 192.129 7.77463 196.464 7.7409C199.658 7.75806 202.851 7.58913 206.026 7.23497"
+										fill="#DF2E2E" />
+								</svg>
+							</span>
+						</h1>
+					</div>
+				</div>
+
+				<!-- Texto explicativo -->
+				<div class="col-lg-6">
+					<div class="si__work__process__text">
+						<p>Baixe o app OX4 no seu smartphone e comece a reservar corridas em minutos. Disponível para
+							Android e iPhone.</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Passos para baixar o app -->
+			<div class="row">
+				<div class="col-lg-4 col-md-6 wow fadeInUp animated" data-wow-delay="1s">
+					<div class="si__work__process__box">
+						<div class="si__work__process__icon">
+							<div class="si__work__process__icon__inner text-center">
+								<i class="fas fa-download" style="color: #2e3f6e; font-size: 40px;"></i>
+								<div class="si__work__process__icon__number"><span
+										style="background-color: #2e3f6e;">01</span></div>
+							</div>
+						</div>
+						<div class="si__work__process__content text-center">
+							<h5>Baixe o App</h5>
+							<p>Encontre o OX4 na App Store ou Google Play e faça o download.</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-4 col-md-6 wow fadeInUp animated" data-wow-delay="1.5s">
+					<div class="si__work__process__box">
+						<div class="si__work__process__icon">
+							<div class="si__work__process__icon__inner text-center">
+								<i class="fas fa-user-plus" style="color: #2e3f6e; font-size: 40px;"></i>
+								<div class="si__work__process__icon__number"><span
+										style="background-color: #2e3f6e;">02</span></div>
+							</div>
+						</div>
+						<div class="si__work__process__content text-center">
+							<h5>Cadastre-se</h5>
+							<p>Crie sua conta como passageiro ou motorista parceiro.</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-4 col-md-6 wow fadeInUp animated" data-wow-delay="2s">
+					<div class="si__work__process__box last-box">
+						<div class="si__work__process__icon">
+							<div class="si__work__process__icon__inner text-center">
+								<i class="fas fa-motorcycle" style="color: #2e3f6e; font-size: 40px;"></i>
+								<div class="si__work__process__icon__number"><span
+										style="background-color: #2e3f6e;">03</span></div>
+							</div>
+						</div>
+						<div class="si__work__process__content text-center">
+							<h5>Comece a Viajar</h5>
+							<p>Reserve corridas e aproveite a experiência OX4, seguro e rápido.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+
+<!-- SI OUR Features -->
+<section class="si__our__features__area pt-120 pb-120 custom__width bg"
+		style="background: url('{% static 'assets/images/features/bg.png' %}') no-repeat center center / cover;">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-5 wow fadeInUp animated" data-wow-delay=".5s">
+					<div class="si__our__features__box">
+						<div class="si__our__features__box__inner">
+							<div class="si__section__title pb-40">
+								<h5> Experimente a OX4 Transporte <i class="fa-regular fa-chevrons-right"></i> </h5>
+								<h1 class="text-white text-anime-style-3"> Reserva viagens sem problemas, <br>
+									<span class="si__section__title__highlight"> OX4 Transporte <svg width="206"
+											height="8" viewBox="0 0 206 8" fill="none"
+											xmlns="http://www.w3.org/2000/svg">
+											<path
+												d="M3.44926 5.97856C9.63291 6.63065 15.8166 7.12254 22.0002 7.45421C25.7441 7.65658 29.4796 7.81679 33.232 7.88425C38.6202 7.96857 44.0168 7.88426 49.4051 7.74934C54.0597 7.65658 58.7227 7.59756 63.3773 7.5301L74.5585 7.32773C78.8589 7.2434 83.1594 7.19281 87.4514 7.06632C97.334 6.77963 107.214 6.49855 117.091 6.2231C121.02 6.12191 124.95 6.07132 128.896 6.02916L137.455 5.9364C138.745 5.9364 140.035 5.9364 141.325 5.9364L150.769 6.07132C152.135 6.07132 153.51 6.07132 154.876 6.1725C159.421 6.39174 163.974 6.57725 168.519 6.85552C173.494 7.15908 178.472 7.38675 183.453 7.53853C187.787 7.67345 192.129 7.77463 196.464 7.7409C199.658 7.75806 202.851 7.58913 206.026 7.23497C203.935 6.93141 201.852 6.58568 199.752 6.30742H199.938C195.334 5.65813 190.704 5.13533 186.083 4.67999C182.486 4.32584 178.885 4.00541 175.282 3.71872L179.295 3.53321L184.996 3.23808C187.416 3.12846 189.836 2.96824 192.264 2.84176C196.658 2.62252 201.042 2.31896 205.41 1.88892C200.983 1.45044 196.514 1.39985 192.062 1.31552C187.312 1.29866 182.573 1.29023 177.845 1.29023C173.348 1.29023 168.851 1.36893 164.354 1.52633C160.331 1.63595 156.309 1.754 152.279 1.82989L142.514 2.02384C140.929 2.02384 139.335 2.10816 137.75 2.11659L121.729 2.18405C120.379 2.18405 119.03 2.18405 117.689 2.18405L110.682 2.13345L101.28 2.0407C100.142 2.0407 99.0036 2.0407 97.8652 1.99011L81.0935 1.58536C76.6497 1.47574 72.2143 1.28179 67.7789 1.13001C59.4478 0.834885 51.1252 0.514459 42.7942 0.286788C38.3925 0.160305 33.9909 0.0591196 29.5808 0.0253906H26.2079C24.201 0.0253906 22.1885 0.0253906 20.1704 0.0253906C18.6357 0.0253906 17.0927 0.101278 15.5496 0.101278C10.3806 0.101278 5.20315 0.227762 0.0341797 0.253059C1.39177 0.472297 2.74936 0.691541 4.11539 0.87705L8.27251 1.39985C10.8359 1.72027 13.3993 2.01822 15.9627 2.29367C16.4349 2.34426 16.9156 2.36956 17.3962 2.41172C18.7622 2.52415 20.1283 2.62534 21.4943 2.71528C24.5046 2.93452 27.5149 3.11159 30.5337 3.26337C32.2201 3.35613 33.9066 3.40672 35.593 3.45732C27.2704 3.75245 18.9562 4.35114 10.6757 5.19436C8.26408 5.45576 5.85245 5.7003 3.44926 5.97856Z"
+												fill="#DF2E2E" />
+										</svg></span>
+								</h1>
+								<div class="si__our__features__box__content">
+									<p>Reserva viagens sem problemas, mesmo com Internet de baixa velocidade.
+										Desenvolvemos a app Yango Lite para funcionar bem com velocidades de Internet
+										lentas, permitindo circular sem problemas, seja no centro da cidade ou numa área
+										remota.</p>
+									<div style="display:flex; gap:10px; margin-top:15px;">
+										<a href="https://play.google.com/store" target="_blank">
+											<img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+												style="height:40px;" alt="Play Store">
+										</a>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-7">
+					<div class="si__our__features__thumb reveal-left">
+						<div class="si__our__features__thumb__img">
+    <img 
+        src="{% static 'assets1/images/IMG-20251217-WA0010.jpg' %}" 
+        alt=""
+        style="width: 600px; border-radius: 20px;"
+    >
+</div>
+
+						<div class="si__our__features__thumb__text">
+							<h1 class="counter">5</h1>
+							<h3>k+</h3>
+							<span>Professional</span>
+							<span>Team members</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+<!-- SI Testimonial Area -->
+<section class="si__testimonial__area pb-115">
+	<div class="container">
+		<div class="row si__testimonial__bg custom__width__two bg"  style="background: url(assets/images/testimonial/Testimonial1.png);">
+			<div class="col-lg-12">
+				<div class="swiper card-testimonial wow fadeInUp animated" data-wow-delay=".5s">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<div class="si__testimonial__box">
+								<div class="si__testimonial__icon">
+									<img src="assets/images/testimonial/testimonial.png" alt="">						
+								</div>
+								<div class="si__testimonial__text">
+									<p>Leverage agile frameworks t provide a robust synopsis <br> for strategy foster Levera agile frame works to provide <br> a robust synopsis  for strat foster collaborative thinking <br> to further the overall value prop osition. </p>
+								</div>
+								<div class="si__testimonial__user">
+									<div class="si__testimonial__user__img">
+										<img src="assets/images/testimonial/img.png" alt="">
+									</div>
+									<div class="si__testimonial__user__content">
+										<h6>Saad Alam</h6>
+										<span>Medical Assistant</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="si__testimonial__box">
+								<div class="si__testimonial__icon">
+									<img src="assets/images/testimonial/testimonial.png" alt="">						
+								</div>
+								<div class="si__testimonial__text">
+									<p>Leverage agile frameworks t provide a robust synopsis <br> for strategy foster Levera agile frame works to provide <br> a robust synopsis  for strat foster collaborative thinking <br> to further the overall value prop osition. </p>
+								</div>
+								<div class="si__testimonial__user">
+									<div class="si__testimonial__user__img">
+										<img src="assets/images/testimonial/img2.png" alt="">
+									</div>
+									<div class="si__testimonial__user__content">
+										<h6>Abu Talha</h6>
+										<span>Marketing Coordinator</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="si__testimonial__box">
+								<div class="si__testimonial__icon">
+									<img src="assets/images/testimonial/testimonial.png" alt="">						
+								</div>
+								<div class="si__testimonial__text">
+									<p>Leverage agile frameworks t provide a robust synopsis <br> for strategy foster Levera agile frame works to provide <br> a robust synopsis  for strat foster collaborative thinking <br> to further the overall value prop osition. </p>
+								</div>
+								<div class="si__testimonial__user">
+									<div class="si__testimonial__user__img">
+										<img src="assets/images/testimonial/img2.png" alt="">
+									</div>
+									<div class="si__testimonial__user__content">
+										<h6>Saad Alam</h6>
+										<span>Marketing Coordinator</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12">
+				<div class="si__navigation__testimonial mt-50">
+					<button class="si-button-prev">
+						<img src="{% static 'assets1/images/testimonial/arrow1.png' %}" alt="">
+					</button>
+					<button class="si-button-next">
+						<img src="{% static 'assets1/images/testimonial/arrow2.png' %}" alt="">
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- SI Brand Area -->
+<section class="si__breand__area pb-115">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 col-md-12">
+				<div class="swiper card-brand wow fadeInUp animated" data-wow-delay=".5s">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<div class="si__brand__thumb">
+								<img src="{% static 'assets1/images/brand/1.png' %}" alt="">
+							</div>
+						</div>						
+						<div class="swiper-slide">
+							<div class="si__brand__thumb">
+								<img src="{% static 'assets1/images/brand/2.png' %}" alt="">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="si__brand__thumb">
+								<img src="{% static 'assets1/images/brand/3.png' %}" alt="">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="si__brand__thumb">
+								<img src="{% static 'assets1/images/brand/4.png' %}" alt="">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="si__brand__thumb">
+								<img src="{% static 'assets1/images/brand/5.png' %}" alt="">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="si__brand__thumb">
+								<img src="{% static 'assets1/images/brand/2.png' %}" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- SI Fotter Two Area -->
+<section class="si__fotter__two__area style-bg pt-80 bg" 
+         style="background: url('{% static 'assets1/images/fotter/bg2.png' %}'); background-size: cover; background-position: center;">	<div class="container-fluid custom__container__two">
+
+		<!-- CHAMADA PRINCIPAL -->
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="si__fotter__two__content style__two text-center pb-70">
+					<h1>Junte-se à OX4 Transportes <br> e cresça connosco</h1>
+
+					<form action="https://formspree.io/f/maygbqwa" method="post">
+						<div class="si__fotter__two__mail mail-bg">
+							<a href="index.html">
+								<img src="{% static 'assets1/images/fotter/Highlight_05.png' %}" alt="">
+							</a>
+							<input name="email" type="email" placeholder="Seu email...">
+							<button type="submit" class="si__btn si__styletwo"> INSCREVER-SE </button>
+						</div>
+
+						<div class="form__group style2">
+							<input type="checkbox" id="terms" required>
+							<label for="terms">
+								Li e aceito os Termos e Condições
+							</label>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- CONTEÚDO DO FOOTER -->
+		<div class="row pb-70">
+
+			<!-- LOGO E DESCRIÇÃO -->
+			<div class="col-lg-3 col-md-6">
+				<div class="si__fotter__two__box">
+					<div class="si__fotter__two__box__icon style__two">
+						<a href="index.html">
+							<img style="width: 150px;" src="{% static 'assets1/images/Logotipo 1.png' %}" alt="OX4 Transportes">
+						</a>
+						<p>
+							A OX4 Transportes conecta pessoas a viagens <br>
+							seguras, rápidas e acessíveis em Luanda.
+						</p>
+					</div>
+
+					<div class="si__fotter__two__box__social style__two">
+						<a href="#"><i class="fa-brands fa-instagram"></i></a>
+						<a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+						<a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+					</div>
+				</div>
+			</div>
+
+			<!-- SERVIÇOS -->
+			<div class="col-lg-3 col-md-6">
+				<div class="si__fotter__two__text style__two">
+					<h6>Serviços</h6>
+					<ul>
+						<li><a href="#">Moto-Táxi Urbano</a></li>
+						<li><a href="#">Viagens Rápidas</a></li>
+						<li><a href="#">Transporte Seguro</a></li>
+						<li><a href="#">App de Mobilidade</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- SOBRE A EMPRESA -->
+			<div class="col-lg-3 col-md-6">
+				<div class="si__fotter__two__link style__two">
+					<h6>Sobre a OX4</h6>
+					<ul>
+						<li><a href="#">Sobre Nós</a></li>
+						<li><a href="#">Perguntas Frequentes</a></li>
+						<li><a href="#">Parcerias</a></li>
+						<li><a href="#">Trabalhe Connosco</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- CONTACTOS -->
+			<div class="col-lg-3 col-md-6">
+				<div class="si__fotter__two__number style__two">
+					<h6>Contactos</h6>
+					<ul>
+						<li>
+							<i class="fa-light fa-envelope"></i>
+							<a href="mailto:info-ox4@adsgroup-nsd.com">
+								info-ox4@adsgroup-nsd.com
+							</a>
+						</li>
+						<li>
+							<i class="fa-sharp fa-regular fa-location-dot"></i>
+							<a href="#">
+								Talatona, Luanda – Angola
+							</a>
+						</li>
+						<li>
+							<i class="fa-regular fa-phone"></i>
+							<a href="tel:+244923908353">
+								+244 923 908 353
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- COPYRIGHT -->
+	<section class="si__copyright__area style_three">
+		<div class="container custom__container__two">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="si__copyright__content style__two">
+						<p>© OX4 Transportes 2025 | Todos os direitos reservados</p>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="si__copyright__text style__two">
+						<ul>
+							<li><a href="#">Termos e Condições</a></li>
+							<li><a href="#">Política de Privacidade</a></li>
+							<li><a href="#">Contactos</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</section>
+
+
+<!-- Scrollup -->
+<div id="scroll-percentage"><span id="scroll-percentage-value"></span></div>
+
+<!--==================================================-->
+<!-- Start Search Popup Area -->
+<!--==================================================-->
+<div class="search-popup">
+	<button class="close-search style-two"><i class="fa-sharp fa-light fa-xmark"></i></button>
+	<button class="close-search"><i class="fa-sharp fa-regular fa-up"></i></button>
+	<form method="post" action="about-us.html#">
+		<div class="form-group">
+			<input type="search" name="search-field" value="" placeholder="Search Here" required="">
+			<button type="submit"><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
+		</div>
+	</form>
+</div>
+
+{% include 'include/java.html' %}
+
+</body>
+</html>
