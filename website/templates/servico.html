@@ -1,0 +1,187 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>OX4 Transporte | Serviços</title>
+    <meta name="description" content="Serviços de Moto Táxi e Moto Entrega rápidos, seguros e disponíveis 24h.">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    {% load static %}
+    {% include 'include/css.html' %}
+</head>
+
+<body>
+
+<!-- PRE LOADER -->
+{% include 'include/loading.html' %}
+
+<!-- MENU -->
+{% include 'include/menusite.html' %}
+
+<!-- BREADCUMB -->
+<section class="si__breadcumb__area bg" style="background: url({% static 'assets/images/breadcumb/Hero.png' %});">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="si__breadcumb__text text-center">
+                    <h1>Nossos Serviços</h1>
+                    <span>
+                        <a href="{% url 'homesite' %}">Home</a>
+                        <i class="fa-regular fa-chevron-right"></i>
+                        Serviços
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section class="si__service__area custom__width style__service bg">
+    <div class="container">
+        <div class="row">
+
+            <!-- 1 -->
+            <div class="col-lg-3 wow fadeInUp">
+                <div class="si__service__box style-box">
+                    <h6 class="si__service__title">
+                        <a href="#">Moto Táxi Urbano<br>Rápido e Seguro</a>
+                    </h6>
+                    <a class="si__service__btn" href="#">Ver Detalhes <i class="fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="col-lg-3 wow fadeInUp">
+                <div class="si__service__box style-box">
+                    <h6 class="si__service__title">
+                        <a href="#">Moto Entrega<br>Encomendas & Documentos</a>
+                    </h6>
+                    <a class="si__service__btn" href="#">Ver Detalhes <i class="fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="col-lg-3 wow fadeInUp">
+                <div class="si__service__box style-box">
+                    <h6 class="si__service__title">
+                        <a href="#">Entregas Empresariais<br>Serviço Corporativo</a>
+                    </h6>
+                    <a class="si__service__btn" href="#">Ver Detalhes <i class="fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- 4 -->
+            <div class="col-lg-3 wow fadeInUp">
+                <div class="si__service__box style-box">
+                    <h6 class="si__service__title">
+                        <a href="#">Transporte Executivo<br>Conforto & Pontualidade</a>
+                    </h6>
+                    <a class="si__service__btn" href="#">Ver Detalhes <i class="fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- 5 -->
+            <div class="col-lg-3 wow fadeInUp">
+                <div class="si__service__box style-box">
+                    <h6 class="si__service__title">
+                        <a href="#">Atendimento 24 Horas<br>Dia e Noite</a>
+                    </h6>
+                    <a class="si__service__btn" href="#">Ver Detalhes <i class="fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- 6 -->
+            <div class="col-lg-3 wow fadeInUp">
+                <div class="si__service__box style-box">
+                    <h6 class="si__service__title">
+                        <a href="#">Entrega de Refeições<br>Rápido e Seguro</a>
+                    </h6>
+                    <a class="si__service__btn" href="#">Ver Detalhes <i class="fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- 7 -->
+            <div class="col-lg-3 wow fadeInUp">
+                <div class="si__service__box style-box">
+                    <h6 class="si__service__title">
+                        <a href="#">Compras & Recados<br>Serviço Sob Medida</a>
+                    </h6>
+                    <a class="si__service__btn" href="#">Ver Detalhes <i class="fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- 8 -->
+            <div class="col-lg-3 wow fadeInUp">
+                <div class="si__service__box style-box">
+                    <h6 class="si__service__title">
+                        <a href="#">Serviços Personalizados<br>Conforme sua Necessidade</a>
+                    </h6>
+                    <a class="si__service__btn" href="#">Ver Detalhes <i class="fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="si__faq__are pb-120">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h5>Perguntas Frequentes</h5>
+                <h1>Soluções Rápidas para Mobilidade Urbana</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <ul class="my-accordion">
+
+                    <li>
+                        <h2>Como funciona o Moto Táxi?</h2>
+                        <p>Solicite a corrida, o motociclista chega rapidamente e leva você com segurança ao destino.</p>
+                    </li>
+
+                    <li>
+                        <h2>Que tipos de entrega vocês fazem?</h2>
+                        <p>Documentos, encomendas, refeições, compras e serviços personalizados.</p>
+                    </li>
+
+                    <li>
+                        <h2>O serviço funciona 24 horas?</h2>
+                        <p>Sim, atendemos todos os dias, inclusive feriados e horários noturnos.</p>
+                    </li>
+
+                    <li>
+                        <h2>Como garantem a segurança?</h2>
+                        <p>Motociclistas treinados, uso obrigatório de capacete e cumprimento das normas de trânsito.</p>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="col-lg-6">
+                <img src="{% static 'assets/images/faq/fag.png' %}" alt="Moto Táxi OX4">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- RODAPÉ -->
+<section class="si__fotter__two__area style-bg pt-80 bg"
+    style="background: url({% static 'assets/images/fotter/bg2.png' %});">
+
+    <div class="container text-center">
+        <h1>OX4 Transporte<br>Rápido, Seguro e Confiável</h1>
+    </div>
+
+    {% include 'include/footer.html' %}
+</section>
+
+{% include 'include/java.html' %}
+
+</body>
+</html>
