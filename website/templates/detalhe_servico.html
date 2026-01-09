@@ -1,0 +1,193 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html class="no-js" lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{{ servico.meta_titulo }} | OX4 Transporte</title>
+    <meta name="description" content="{{ servico.meta_descricao }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ servico.titulo }}">
+    <meta property="og:description" content="{{ servico.descricao_curta }}">
+    {% if servico.imagem_principal %}
+    <meta property="og:image" content="{{ servico.imagem_principal.url }}">
+    {% endif %}
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:type" content="website">
+
+    {% include 'include/css.html' %}
+</head>
+
+<body>
+
+<!-- PRE LOADER -->
+{% include 'include/loading.html' %}
+
+<!-- MENU -->
+{% include 'include/menusite.html' %}
+
+<!-- BREADCUMB -->
+<!-- BREADCUMB -->
+<section class="si__breadcumb__area bg" style="background: url({% static 'assets/images/breadcumb/Hero.png' %});">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="si__breadcumb__text text-center">
+                    <h1>{{ servico.titulo }}</h1>
+                    <span>
+                        <a href="{% url 'homesite' %}">Home</a>
+                        <i class="fa-regular fa-chevron-right"></i>
+                        <a href="{% url 'servico' %}">Serviços</a>  <!-- CORRIGIDO: mudado para 'servico' -->
+                        <i class="fa-regular fa-chevron-right"></i>
+                        {{ servico.titulo }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DETALHES DO SERVIÇO -->
+<div class="si__service__details__left__area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Imagem Principal -->
+                {% if servico.imagem_principal %}
+                <div class="si__service__details__left__content wow fadeInUp animated" data-wow-delay=".3s">
+                    <img style="width: 500px; border-radius: 12px;" src="{{ servico.imagem_principal.url }}" alt="{{ servico.titulo }}">
+                </div>
+                {% endif %}
+                
+                <!-- Título e Descrição -->
+                <div class="si__service__details__left__content wow fadeInUp animated" data-wow-delay=".4s">
+                    <h3>{{ servico.titulo }}</h3>
+                    {% if servico.subtitulo %}
+                    <h5 class="text-muted mb-4">{{ servico.subtitulo }}</h5>
+                    {% endif %}
+                    <p>{{ servico.descricao_curta }}</p>
+                    <div class="mt-4">
+                        {{ servico.descricao_longa|safe }}
+                    </div>
+                </div>
+                
+                <!-- Imagem Secundária e Características -->
+                {% if servico.imagem_secundaria %}
+                <div class="si__service__details__left__box mt-5">
+                    <div class="si__service__details__left__thumb wow fadeInUp animated" data-wow-delay=".5s">
+                        <img style="width: 500px; border-radius: 12px;" src="{{ servico.imagem_secundaria.url }}" alt="{{ servico.titulo }}">
+                    </div>
+                    {% if servico.get_caracteristicas_list %}
+                    <div class="si__service__details__left__text mt-4">
+                        <h5 class="mb-4">Principais Características:</h5>
+                        {% for caract in servico.get_caracteristicas_list %}
+                        <span class="d-block mb-3">
+                            <i class="fa-solid fa-check text-primary me-2"></i>
+                            {{ caract }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+                
+                <!-- Benefícios -->
+                {% if servico.beneficios.all %}
+                <div class="si__service__details__left__paragraph wow fadeInUp animated mt-5" data-wow-delay=".6s">
+                    <h4 class="mb-4">Benefícios do Serviço</h4>
+                    <div class="row">
+                        {% for beneficio in servico.beneficios.all %}
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="{{ beneficio.icone }} fa-2x text-primary me-3"></i>
+                                        <h5 class="card-title mb-0">{{ beneficio.titulo }}</h5>
+                                    </div>
+                                    <p class="card-text">{{ beneficio.descricao }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                
+                
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Categoria -->
+                <div class="si__service__details__left__mainbox wow fadeInUp animated" data-wow-delay=".8s">
+                    <div class="si__service__details__left__twotext">
+                        <h6>Serviços Relacionados</h6>
+                    </div>
+                    <div class="si__service__details__left__list">
+                        <ul>
+                            {% for outro in outros_servicos %}
+                            <li>
+                                <a href="{% url 'servicos:detalhe_servico' outro.slug %}">
+                                    <span>{{ outro.titulo }}</span>
+                                    <i class="fa-sharp fa-solid fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            {% empty %}
+                            <li class="text-muted">Nenhum outro serviço disponível</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Informações -->
+                <div class="si__service__details__left__mainbox mt-20 wow fadeInUp animated" data-wow-delay=".9s">
+                    <div class="si__service__details__left__texttwo text-center">
+                        <span>{{ servico.titulo }}</span>
+                        <p>{{ servico.descricao_curta|truncatechars:100 }}</p>
+                    </div>
+                    <div class="si__service__details__left__right">
+                        <ul>
+                            <li>
+                                <a href="tel:+923908353">
+                                    <i class="fa-solid fa-phone me-2"></i> Solicitar por Telefone
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="si__service__details__left__right">
+                        <ul>
+                            <li>
+                                <a href="https://wa.me/923908353">
+                                    <i class="fa-brands fa-whatsapp me-2"></i> Solicitar por WhatsApp
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Estatísticas -->
+                <div class="si__service__details__left__mainbox mt-20 wow fadeInUp animated" data-wow-delay="1s">
+                    <div class="si__service__details__left__texttwo text-center">
+                        <h6>Serviço {{ servico.categoria|title }}</h6>
+                    </div>
+                    <div class="text-center py-3">
+                        <i class="{{ servico.icone }} fa-3x text-primary mb-3"></i>
+                        <p class="mb-2">Disponível 24 horas</p>
+                        <p class="mb-2">Atendimento em toda cidade</p>
+                        <p class="mb-0">Preços competitivos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- RODAPÉ -->
+{% include 'include/footer.html' %}
+
+{% include 'include/java.html' %}
+
+</body>
+</html>

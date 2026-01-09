@@ -33,6 +33,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ckeditor',
+
 
     # Terceiros
     'rest_framework',
@@ -45,6 +47,15 @@ INSTALLED_APPS = [
     'usuarios',
     'front_user'
 ]
+
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'height': 300,
+        'width': '100%',
+    },
+}
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',

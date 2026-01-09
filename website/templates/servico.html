@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE HTML>
 <html class="no-js" lang="pt">
 <head>
@@ -7,7 +8,6 @@
     <meta name="description" content="Serviços de Moto Táxi e Moto Entrega rápidos, seguros e disponíveis 24h.">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    {% load static %}
     {% include 'include/css.html' %}
 </head>
 
@@ -41,87 +41,32 @@
 <section class="si__service__area custom__width style__service bg">
     <div class="container">
         <div class="row">
-
-            <!-- 1 -->
-            <div class="col-lg-3 wow fadeInUp">
+            {% for servico in servicos %}
+            <div class="col-lg-3 col-md-6 col-sm-6 wow fadeInUp">
                 <div class="si__service__box style-box">
-                    <h6 class="si__service__title">
-                        <a href="#">Moto Táxi Urbano<br>Rápido e Seguro</a>
+                    <div class="text-center mb-3">
+                        <i class="{{ servico.icone }} fa-2x" style="color: #2e3f6e;"></i>
+                    </div>
+                    <h6 class="si__service__title text-center">
+                        <a href="{% url 'detalhe_servico' servico.slug %}">
+                            {{ servico.titulo }}<br>
+                            <small>{{ servico.subtitulo }}</small>
+                        </a>
                     </h6>
-                    <a class="si__service__btn" href="#">Ver Detalhes <i class="fa-arrow-right"></i></a>
+                    <p class="text-center px-2">{{ servico.descricao_curta|truncatechars:80 }}</p>
+                    <div class="text-center">
+                        <a class="si__service__btn" href="{% url 'detalhe_servico' servico.slug %}">
+                            Ver Detalhes <i class="fa-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-
-            <!-- 2 -->
-            <div class="col-lg-3 wow fadeInUp">
-                <div class="si__service__box style-box">
-                    <h6 class="si__service__title">
-                        <a href="#">Moto Entrega<br>Encomendas & Documentos</a>
-                    </h6>
-                    <a class="si__service__btn" href="#">Ver Detalhes <i class="fa-arrow-right"></i></a>
-                </div>
+            {% empty %}
+            <div class="col-lg-12 text-center py-5">
+                <h4>Nenhum serviço cadastrado ainda.</h4>
+                <p>Os serviços serão exibidos aqui quando cadastrados no sistema.</p>
             </div>
-
-            <!-- 3 -->
-            <div class="col-lg-3 wow fadeInUp">
-                <div class="si__service__box style-box">
-                    <h6 class="si__service__title">
-                        <a href="#">Entregas Empresariais<br>Serviço Corporativo</a>
-                    </h6>
-                    <a class="si__service__btn" href="#">Ver Detalhes <i class="fa-arrow-right"></i></a>
-                </div>
-            </div>
-
-            <!-- 4 -->
-            <div class="col-lg-3 wow fadeInUp">
-                <div class="si__service__box style-box">
-                    <h6 class="si__service__title">
-                        <a href="#">Transporte Executivo<br>Conforto & Pontualidade</a>
-                    </h6>
-                    <a class="si__service__btn" href="#">Ver Detalhes <i class="fa-arrow-right"></i></a>
-                </div>
-            </div>
-
-            <!-- 5 -->
-            <div class="col-lg-3 wow fadeInUp">
-                <div class="si__service__box style-box">
-                    <h6 class="si__service__title">
-                        <a href="#">Atendimento 24 Horas<br>Dia e Noite</a>
-                    </h6>
-                    <a class="si__service__btn" href="#">Ver Detalhes <i class="fa-arrow-right"></i></a>
-                </div>
-            </div>
-
-            <!-- 6 -->
-            <div class="col-lg-3 wow fadeInUp">
-                <div class="si__service__box style-box">
-                    <h6 class="si__service__title">
-                        <a href="#">Entrega de Refeições<br>Rápido e Seguro</a>
-                    </h6>
-                    <a class="si__service__btn" href="#">Ver Detalhes <i class="fa-arrow-right"></i></a>
-                </div>
-            </div>
-
-            <!-- 7 -->
-            <div class="col-lg-3 wow fadeInUp">
-                <div class="si__service__box style-box">
-                    <h6 class="si__service__title">
-                        <a href="#">Compras & Recados<br>Serviço Sob Medida</a>
-                    </h6>
-                    <a class="si__service__btn" href="#">Ver Detalhes <i class="fa-arrow-right"></i></a>
-                </div>
-            </div>
-
-            <!-- 8 -->
-            <div class="col-lg-3 wow fadeInUp">
-                <div class="si__service__box style-box">
-                    <h6 class="si__service__title">
-                        <a href="#">Serviços Personalizados<br>Conforme sua Necessidade</a>
-                    </h6>
-                    <a class="si__service__btn" href="#">Ver Detalhes <i class="fa-arrow-right"></i></a>
-                </div>
-            </div>
-
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -171,15 +116,7 @@
 </section>
 
 <!-- RODAPÉ -->
-<section class="si__fotter__two__area style-bg pt-80 bg"
-    style="background: url({% static 'assets/images/fotter/bg2.png' %});">
-
-    <div class="container text-center">
-        <h1>OX4 Transporte<br>Rápido, Seguro e Confiável</h1>
-    </div>
-
-    {% include 'include/footer.html' %}
-</section>
+{% include 'include/footer.html' %}
 
 {% include 'include/java.html' %}
 
