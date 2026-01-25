@@ -29,8 +29,8 @@
                                         <a href="#">Empresa <i class="fa-light fa-chevron-down"></i></a>
                                         <ul class="sub__menu">
                                             <li><a href="{% url 'sobresite' %}">Sobre Nós</a></li>
-                                            <li><a href="team.html">Equipe</a></li>
-                                            <li><a href="faq.html">FAQ</a></li>
+                                            <li><a href="#">Equipe</a></li>
+                                            <li><a href="#">FAQ</a></li>
                                             <li><a href="{% url 'servico' %}">servicos</a></li>
                                         </ul>
                                     </li>
@@ -136,36 +136,25 @@
             <nav class="si_menu">
                 <ul style="color: #ffffff;">
                     <li><a href="index.html" style="color: #ffffff;"> Home </a>
-
                     </li>
                     <li><a href="{% url 'passageiro' %}" style="color: #ffffff;"> Passageiros</a></li>
                     <li><a href="{% url 'motoqueiro' %}" style="color: #ffffff;"> motoqueiro</a></li>
 
 
-                    <li><a href="index.html#" style="color: #ffffff;"> Páginas </a>
+                    <li><a href="#" style="color: #ffffff;"> Páginas </a>
                         <ul class="sub__menu">
-                            <li><a href="about-us.html" style="color: #ffffff;"> Sobre Nós </a></li>
-                            <li><a href="team.html" style="color: #ffffff;"> Equipe </a></li>
-                            <li><a href="faq.html" style="color: #ffffff;"> FAQ </a></li>
+                            <li><a href="#" style="color: #ffffff;"> Sobre Nós </a></li>
+                            <li><a href="#" style="color: #ffffff;"> Equipe </a></li>
+                            <li><a href="#" style="color: #ffffff;"> FAQ </a></li>
                         </ul>
                     </li>
-                    <li><a href="index.html#" style="color: #ffffff;"> Serviços </a>
+                    <li><a href="{% url 'servico' %}" style="color: #ffffff;"> Serviços </a></li>
                         <ul class="sub__menu">
-                            <li><a href="service.html" style="color: #ffffff;"> Serviços </a></li>
-                            <li><a href="service-details.html" style="color: #ffffff;"> Detalhes do Serviço </a></li>
+                            <li><a href="#" style="color: #ffffff;"> Projetos </a></li>
                         </ul>
                     </li>
-                    <li><a href="index.html#" style="color: #ffffff;"> Projetos </a>
-                        <ul class="sub__menu">
-                            <li><a href="project.html" style="color: #ffffff;"> Projetos </a></li>
-                            <li><a href="project-details.html" style="color: #ffffff;"> Detalhes do Projeto </a></li>
-                        </ul>
-                    </li>
-                    <li><a href="index.html#" style="color: #ffffff;"> Blog </a>
-                        <ul class="sub__menu">
-                            <li><a href="blog.html" style="color: #ffffff;"> Blog </a></li>
-                            <li><a href="blog-details.html" style="color: #ffffff;"> Detalhes do Blog </a></li>
-                        </ul>
+                    <li><a href="#" style="color: #ffffff;"> Blog </a>
+    
                     </li>
                     <li><a href="{% url 'contacto' %}" style="color: #ffffff;"> Contato</a></li>
                 </ul>

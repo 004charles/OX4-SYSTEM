@@ -334,12 +334,521 @@
         .si__header__offcanvas__bar__inner span {
             background-color: white !important;
         }
+
+
+        
+
     </style>
+    
 
 </head>
 
 <body>
 
+    <style>
+        /* Container das Imagens */
+.image-stack-wrapper {
+    position: relative;
+    height: 600px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bizso-card {
+    position: absolute;
+    border-radius: 35px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    background: #1a2332;
+}
+
+.bizso-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Card de Trás (Rua.png) */
+.card-back {
+    width: 340px;
+    height: 480px;
+    z-index: 1;
+    transform: rotate(-10deg) translateX(-60px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Card da Frente (Corrida.png) */
+.card-front {
+    width: 340px;
+    height: 480px;
+    z-index: 2;
+    transform: rotate(6deg) translateX(70px) translateY(30px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* Efeito Hover - Apenas para desktop */
+@media (min-width: 992px) {
+    .image-stack-wrapper:hover .card-back {
+        transform: rotate(-13deg) translateX(-90px) scale(1.03);
+    }
+
+    .image-stack-wrapper:hover .card-front {
+        transform: rotate(9deg) translateX(100px) translateY(10px) scale(1.05);
+    }
+}
+
+/* Badge Flutuante */
+.floating-user-badge {
+    position: absolute;
+    bottom: 40px;
+    left: -20px;
+    z-index: 10;
+    background: #ffffff;
+    padding: 15px 25px;
+    border-radius: 20px;
+    animation: floatVertical 5s ease-in-out infinite;
+}
+
+.floating-user-badge .icon-circle {
+    background: #4a6cf7;
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.floating-user-badge h6 {
+    color: #1a2332;
+    font-weight: 800;
+    font-size: 1.1rem;
+}
+
+.floating-user-badge small {
+    color: #777;
+    font-weight: 500;
+}
+
+@keyframes floatVertical {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-25px);
+    }
+}
+
+/* ================================================
+   RESPONSIVIDADE DA SEÇÃO SI__SLIDER__FIVE__AREA
+   ================================================ */
+
+/* Ajustes gerais do container */
+.si__slider__five__area {
+    padding: 80px 0 !important;
+}
+
+/* Para telas grandes (acima de 1400px) */
+@media (min-width: 1400px) {
+    .si__slider__five__content h1 {
+        font-size: 4rem !important;
+    }
+    
+    .card-back, .card-front {
+        width: 380px;
+        height: 520px;
+    }
+}
+
+/* Para desktop médio (1200px - 1399px) */
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .si__slider__five__content h1 {
+        font-size: 3.5rem !important;
+    }
+    
+    .card-back, .card-front {
+        width: 320px;
+        height: 450px;
+    }
+}
+
+/* Para desktop pequeno/tablet grande (992px - 1199px) */
+@media (max-width: 1199px) {
+    .si__slider__five__content h1 {
+        font-size: 3rem !important;
+        line-height: 1.2 !important;
+    }
+    
+    .lead.text-light {
+        font-size: 1.1rem !important;
+        max-width: 100% !important;
+    }
+    
+    .image-stack-wrapper {
+        height: 500px;
+    }
+    
+    .card-back, .card-front {
+        width: 280px;
+        height: 400px;
+    }
+    
+    .card-back {
+        transform: rotate(-8deg) translateX(-40px);
+    }
+    
+    .card-front {
+        transform: rotate(4deg) translateX(50px) translateY(20px);
+    }
+    
+    .floating-user-badge {
+        left: -10px;
+        padding: 12px 20px;
+    }
+}
+
+/* Para tablets (768px - 991px) */
+@media (max-width: 991px) {
+    .si__slider__five__area {
+        padding: 60px 0 !important;
+    }
+    
+    .row.align-items-center {
+        flex-direction: column;
+    }
+    
+    .si__slider__five__content {
+        text-align: center;
+        margin-bottom: 40px !important;
+    }
+    
+    .si__slider__five__content h1 {
+        font-size: 2.5rem !important;
+    }
+    
+    .lead.text-light {
+        font-size: 1rem !important;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .features-highlight {
+        justify-content: center;
+        gap: 15px !important;
+    }
+    
+    .feature-item {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+    
+    .si__slider__five__box {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px !important;
+        margin-bottom: 30px;
+    }
+    
+    .btn-lg {
+        padding: 12px 30px !important;
+        font-size: 14px !important;
+    }
+    
+    .image-stack-wrapper {
+        height: 400px;
+        margin-top: 0;
+    }
+    
+    .card-back, .card-front {
+        width: 220px;
+        height: 320px;
+    }
+    
+    .card-back {
+        transform: rotate(-6deg) translateX(-30px);
+    }
+    
+    .card-front {
+        transform: rotate(3deg) translateX(35px) translateY(15px);
+    }
+    
+    .floating-user-badge {
+        position: relative;
+        left: 0;
+        bottom: 0;
+        margin: -30px auto 0;
+        width: 200px;
+        animation: none;
+    }
+    
+    .floating-user-badge .icon-circle {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}
+
+/* Para celulares grandes (576px - 767px) */
+@media (max-width: 767px) {
+    .si__slider__five__area {
+        padding: 50px 0 !important;
+    }
+    
+    .badge-animated {
+        padding: 6px 15px !important;
+        font-size: 12px;
+    }
+    
+    .badge-text {
+        font-size: 12px !important;
+    }
+    
+    .si__slider__five__content h1 {
+        font-size: 2rem !important;
+    }
+    
+    .si__slider__five__content h1 span {
+        border-bottom-width: 3px !important;
+    }
+    
+    .features-highlight {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px !important;
+    }
+    
+    .feature-item {
+        width: fit-content;
+    }
+    
+    .si__slider__five__box {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .si__slider__five__box a {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .image-stack-wrapper {
+        height: 350px;
+    }
+    
+    .card-back, .card-front {
+        width: 180px;
+        height: 260px;
+    }
+    
+    .card-back {
+        transform: rotate(-4deg) translateX(-20px);
+    }
+    
+    .card-front {
+        transform: rotate(2deg) translateX(25px) translateY(10px);
+    }
+    
+    .bizso-card {
+        border-radius: 25px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Para celulares pequenos (480px - 575px) */
+@media (max-width: 575px) {
+    .si__slider__five__area {
+        padding: 40px 0 !important;
+    }
+    
+    .si__slider__five__content h1 {
+        font-size: 1.8rem !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .lead.text-light {
+        font-size: 0.95rem !important;
+        margin-bottom: 25px !important;
+    }
+    
+    .image-stack-wrapper {
+        height: 300px;
+    }
+    
+    .card-back, .card-front {
+        width: 150px;
+        height: 220px;
+        border-radius: 20px;
+    }
+    
+    .card-back {
+        transform: rotate(-3deg) translateX(-15px);
+    }
+    
+    .card-front {
+        transform: rotate(1.5deg) translateX(20px) translateY(8px);
+    }
+    
+    .floating-user-badge {
+        padding: 10px 15px;
+        width: 170px;
+    }
+    
+    .floating-user-badge h6 {
+        font-size: 0.9rem;
+    }
+    
+    .floating-user-badge small {
+        font-size: 0.8rem;
+    }
+    
+    .floating-user-badge .icon-circle {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Para celulares muito pequenos (abaixo de 480px) */
+@media (max-width: 479px) {
+    .si__slider__five__content h1 {
+        font-size: 1.6rem !important;
+    }
+    
+    .badge-animated {
+        padding: 5px 12px !important;
+        font-size: 11px;
+    }
+    
+    .feature-item {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+    
+    .btn-lg {
+        padding: 10px 20px !important;
+        font-size: 13px !important;
+    }
+    
+    .image-stack-wrapper {
+        height: 250px;
+    }
+    
+    .card-back, .card-front {
+        width: 130px;
+        height: 190px;
+        border-radius: 15px;
+    }
+    
+    .card-back {
+        transform: rotate(-2deg) translateX(-10px);
+        border-width: 0.5px;
+    }
+    
+    .card-front {
+        transform: rotate(1deg) translateX(15px) translateY(5px);
+        border-width: 0.5px;
+    }
+    
+    .floating-user-badge {
+        padding: 8px 12px;
+        width: 150px;
+        border-radius: 15px;
+    }
+    
+    .floating-user-badge h6 {
+        font-size: 0.85rem;
+    }
+    
+    .floating-user-badge small {
+        font-size: 0.75rem;
+    }
+}
+
+/* Para orientação paisagem em celulares */
+@media (max-width: 767px) and (orientation: landscape) {
+    .si__slider__five__area {
+        padding: 30px 0 !important;
+        min-height: auto !important;
+    }
+    
+    .row.align-items-center {
+        flex-direction: row;
+    }
+    
+    .si__slider__five__content {
+        margin-bottom: 20px !important;
+    }
+    
+    .si__slider__five__content h1 {
+        font-size: 1.8rem !important;
+    }
+    
+    .image-stack-wrapper {
+        height: 200px;
+    }
+    
+    .card-back, .card-front {
+        width: 120px;
+        height: 170px;
+    }
+    
+    .si__slider__five__box {
+        flex-direction: row;
+        max-width: 100%;
+    }
+}
+
+/* Ajustes para quando não há hover (touch devices) */
+@media (hover: none) and (pointer: coarse) {
+    .image-stack-wrapper:hover .card-back,
+    .image-stack-wrapper:hover .card-front {
+        transform: none !important;
+    }
+    
+    .floating-user-badge {
+        animation: none;
+    }
+}
+
+/* Ajustes para telas de alta densidade (Retina) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .bizso-card {
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+    
+    @media (max-width: 767px) {
+        .bizso-card {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+    }
+}
+
+/* Garantir que as imagens carreguem responsivamente */
+.bizso-card img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Melhorar performance em mobile */
+@media (max-width: 767px) {
+    .image-stack-wrapper,
+    .bizso-card {
+        will-change: transform;
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+    }
+}
+        
+    </style>
     {% include 'include/loading.html' %}
 
     <!-- SI Header Area -->
@@ -366,7 +875,7 @@
                                 DISPONÍVEL</span>
                         </div>
 
-                        <h1 class="text-white mb-4" style="font-size: 3.8rem; font-weight: 800; line-height: 1.1;">
+                        <h1 class="text-white mb-4" style="font-size: 2.2rem; font-weight: 800; line-height: 1.1;">
                             <span style="color: #4a6cf7;">Segurança</span> e Conforto
                             <br>em <span style="border-bottom: 5px solid #4a6cf7;">Cada Viagem</span>
                         </h1>
@@ -383,18 +892,16 @@
                             <div class="feature-item text-white">
                                 <i class="fas fa-bolt me-2 text-primary"></i> Chega em 5 min
                             </div>
-                            <div class="feature-item text-white">
-                                <i class="fas fa-star me-2 text-primary"></i> Avaliação 4.9+
-                            </div>
+                            
                         </div>
                     </div>
 
                     <div class="si__slider__five__box d-flex align-items-center gap-4">
                         <a class="btn btn-primary btn-lg px-5 py-3" href="#"
-                            style="border-radius: 15px; background: #4a6cf7; border: none; font-weight: 600;">
+                            style="border-radius: 15px; background: #4a6cf7; border: none; font-weight: 600; font-size: 15px;">
                             <i class="fas fa-download me-2"></i> Baixar agora
                         </a>
-                        <a class="btn btn-outline-light btn-lg px-4 py-3" href="#" style="border-radius: 15px;">
+                        <a class="btn btn-outline-light btn-lg px-4 py-3" href="#" style="border-radius: 15px; font-size: 15px;">
                             <i class="fas fa-external-link-alt me-2"></i> Usar na Web
                         </a>
                     </div>
@@ -410,15 +917,7 @@
                             <img src="{% static 'assets1/images/pricing/corrida.png' %}" alt="Corrida">
                         </div>
 
-                        <div class="floating-user-badge shadow-lg">
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="icon-circle"><i class="fas fa-users"></i></div>
-                                <div>
-                                    <h6 class="mb-0">+10k</h6>
-                                    <small>Usuários Ativos</small>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -628,11 +1127,11 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="si__gallery__two__text wow fadeInUp animated" data-wow-delay=".75s">
-                        <p class="text-light">A OX4 redefine a mobilidade urbana com uma plataforma moderna que garante
-                            segurança e economia para motoristas e passageiros.</p>
-                    </div>
-                </div>
+    <div class="si__gallery__two__text wow fadeInUp animated" data-wow-delay=".75s">
+        <p style="color: black;">A OX4 redefine a mobilidade urbana com uma plataforma moderna que garante
+            segurança e economia para motoristas e passageiros.</p>
+    </div>
+</div>
             </div>
 
             <!-- Grid de imagens com ANIMAÇÕES CONTÍNUAS -->
